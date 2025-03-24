@@ -44,9 +44,9 @@
       align-items: center;
     }
     
-    /* 侧边栏 */
+    /* 侧边栏：PC 端宽度调整为 180px */
     .sidebar {
-      width: 220px;
+      width: 180px;
       background: var(--sidebar-bg);
       border-right: 1px solid var(--border-color);
       padding: 15px;
@@ -84,23 +84,22 @@
       color: var(--hover-color);
     }
     
-    /* 主要内容 */
+    /* 主要内容：左侧边距调整为 200px */
     .content {
-      margin-left: 240px; /* 确保桌面端内容区不被侧边栏遮挡 */
+      margin-left: 200px;
       padding: 20px;
       max-width: 900px;
       width: 100%;
-      box-sizing: border-box;
     }
     
-    /* 标题 */
+    /* 标题：居中显示 */
     .main-title {
       font-size: 2em;
       font-weight: bold;
       border-bottom: 2px solid var(--border-color);
       padding-bottom: 5px;
       margin-bottom: 15px;
-      text-align: center; /* 标题居中 */
+      text-align: center;
     }
     
     /* 章节 */
@@ -345,6 +344,7 @@
         });
     }
     
+    // 抓取超级巨星和年度硬汉的预览
     fetchPreview("superstar.html", "superstar-preview");
     fetchPreview("hardman.html", "hardman-preview");
   </script>
