@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xperia 机型</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        .sort-buttons {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .sort-buttons button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin: 0 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .sort-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        ul li a:hover {
+            color: #0056b3;
+        }
+
+        /* 年份和机型分层 */
+        .year-item {
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 1.2em;
+            background-color: rgba(220, 220, 220, 0.8);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .model-sublist {
+            margin-left: 20px;
+            padding-left: 10px;
+            display: none;
+        }
+
+        .year-item.active .model-sublist {
+            display: block;
+        }
+
+        /* 硬件参数表格 */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f1f1f1;
+            color: #555;
+        }
+
+        table td {
+            background-color: #fafafa;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Xperia 机型</h1>
+        <div class="sort-buttons">
+            <button onclick="sortModels(true)">按年份升序排序</button>
+            <button onclick="sortModels(false)">按年份降序排序</button>
+        </div>
+        <ul id="modelList"></ul>
+    </div>
+
+    <script>
+        const xperiaModels = [
+            { year: 2007, models: ["Xperia X1"] },
+            { year: 2008, models: ["Xperia X2"] },
+            { year: 2009, models: ["Xperia X10"] },
+            { year: 2010, models: ["Xperia Arc", "Xperia Play"] },
+            { year: 2011, models: ["Xperia Neo", "Xperia Pro"] },
+            { year: 2012, models: ["Xperia S", "Xperia U"] },
+            { year: 2013, models: ["Xperia Z1", "Xperia Z Ultra"] },
+            { year: 2014, models: ["Xperia Z2", "Xperia Z3"] },
+            { year: 2015, models: ["Xperia Z5"] },
+            { year: 2016, models: ["Xperia XZ"] },
+            { year: 2017, models: ["Xperia XZ1"] },
+            { year: 2018, models: ["Xperia XZ2"] },
+            { year: 2019, models: ["Xperia 1"] },
+            { year: 2020, models: ["Xperia 5 II"] },
+            { year: 2021, models: ["Xperia Pro-I"] },
+            { year: 2022, models: ["Xperia 1 IV"] },
+            { year: 2023, models: ["Xperia 5 V"] }
+        ];
+
+        function renderModels(models) {
+            const modelList = document.getElementById("modelList");
+            modelList.innerHTML = "";
+            models.forEach(item => {
+                const yearItem = document.createElement("li");
+                yearItem.className = "year-item";
+                yearItem.textContent = item.year;
+
+                const modelSubList = document.createElement("ul");
+                modelSubList.className = "model-sublist";
+
+                item.models.forEach(model => {
+                    const modelItem = document.createElement("li");
+                    const modelLink = document.createElement("a");
+
+                    // 转换为页面路径格式：将空格去除并小写
+                    const modelPath = model.replace(/\s+/g, '').toLowerCase() + '.html';
+                    modelLink.href = `./models/${modelPath}`;  // 设置跳转链接
+
+                    modelLink.textContent = model;
+
+                    // 在点击链接时检查该页面是否存在
+                    modelLink.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('HEAD', modelLink.href, true);
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    // 页面存在，跳转
+                                    window.location.href = modelLink.href;
+                                } else {
+                                    // 页面不存在，弹出提示
+                                    alert(`${model} 页面不存在蛆都不剩`);
+                                }
+                            }
+                        };
+                        xhr.send();
+                    });
+
+                    modelItem.appendChild(modelLink);
+                    modelSubList.appendChild(modelItem);
+                });
+
+                yearItem.appendChild(modelSubList);
+                modelList.appendChild(yearItem);
+
+                // Add click event to toggle visibility of model list
+                yearItem.addEventListener('click', () => {
+                    yearItem.classList.toggle('active');
+                });
+            });
+        }
+
+        function sortModels(ascending) {
+            const sortedModels = [...xperiaModels].sort((a, b) =>
+                ascending ? a.year - b.year : b.year - a.year
+            );
+            renderModels(sortedModels);
+        }
+
+        // Default rendering (ascending order)
+        renderModels(xperiaModels);
+    </script>
+</body>
+</html>
