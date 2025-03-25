@@ -261,7 +261,7 @@
     
     <div class="section">
       <h2>欢迎来到 XperiaWiki</h2>
-      <p>本站意在帮助索粉少走点 van♂路，且告慰在天国的 <del>机锋网</del>。</p>
+      <p>本站旨在帮助索粉少走点 van♂路，且告慰在天国的 <del>机锋网</del>。</p>
       <p><strong>1.</strong> 本 Wiki 用爱发电，请勿盗取页面，qqqxx，，，</p>
       <p><strong>2.</strong> 本页面由个人付出了个人时间进行整理，记载的内容可能在三分钟之内死亡，注意备份。</p>
       <p><strong>3.</strong> 本 Wiki 的内容均来自于网络，仅供参考，如果因为本站教程而导致的变砖或者数据丢失等问题，本站概不负责，刷机不规范，变砖两行泪 —— <del>kenichioshima</del></p>
@@ -295,22 +295,33 @@
     </div>
   </div>
   
-  <!-- 右下角喇叭按钮 -->
+<audio id="backgroundAudio" src="上海红茶馆.mp3" preload="auto" loop style="display: none;"></audio>
+
   <button id="toggleAudio" onclick="toggleAudio()">🔊</button>
-  
+
   <script>
-    const audio = document.getElementById('backgroundAudio');
-    const toggleBtn = document.getElementById('toggleAudio');
-    
-    function toggleAudio() {
-      if (audio.paused) {
-        audio.play();
-        toggleBtn.textContent = "🔊";
-      } else {
-        audio.pause();
-        toggleBtn.textContent = "🔇";
-      }
-    }
+  const audio = document.getElementById('backgroundAudio');
+  const toggleBtn = document.getElementById('toggleAudio');
+
+  // 页面加载完成后自动播放
+  document.addEventListener('DOMContentLoaded', function() {
+  audio.play().catch(error => {
+  // Autoplay was prevented. Show muted icon.
+  toggleBtn.textContent = "🔇";
+  });
+  });
+
+  function toggleAudio() {
+  if (audio.paused) {
+  audio.play();
+  toggleBtn.textContent = "🔊";
+  } else {
+  audio.pause();
+  toggleBtn.textContent = "🔇";
+  }
+  }
+
+
     
     // 通用预览抓取函数：抓取指定页面的第一个 <img> 和 <p>
     function fetchPreview(pageUrl, containerId) {
