@@ -1,194 +1,207 @@
 <!DOCTYPE html>
- <html lang="zh">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xperia 机型 - 目录</title>
-  <style>
-  /* Wikipedia 风格 */
-  body {
-  font-family: 'Georgia', serif;
-  background-color: #ffffff;
-  color: #222;
-  margin: 0;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  transition: background-color 0.3s, color 0.3s;
-  }
+ <html lang="zh">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xperia 机型 - 目录</title>
+  <style>
+  /* Wikipedia 风格 */
+  body {
+  font-family: 'Georgia', serif;
+  background-color: #ffffff;
+  color: #222;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+  }
 
-  /* 暗色模式 */
-  body.dark-mode {
-  background-color: #1e1e1e;
-  color: #ddd;
-  }
+  /* 暗色模式 */
+  body.dark-mode {
+  background-color: #1e1e1e;
+  color: #ddd;
+  }
 
-  .container {
-  width: 95%;
-  max-width: 800px;
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s;
-  }
+  .container {
+  width: 95%;
+  max-width: 800px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  display: flex;
+  flex-direction: column; /* 使容器内的元素垂直排列 */
+  align-items: center; /* 使容器内的元素水平居中 */
+  }
 
-  body.dark-mode .container {
-  background: #2a2a2a;
-  }
+  body.dark-mode .container {
+  background: #2a2a2a;
+  }
 
-  h1 {
-  font-size: 1.8em;
-  text-align: center;
-  margin-bottom: 20px;
-  }
+  .header-image {
+  width: 100%; /* 让图片宽度撑满容器 */
+  max-height: 200px; /* 设置最大高度，防止图片过大 */
+  object-fit: contain; /* 保持图片比例，适应容器 */
+  margin-bottom: 15px; /* 图片与标题之间留出间距 */
+  border-radius: 5px; /* 可选：添加圆角 */
+  }
 
-  .sort-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  }
+  h1 {
+  font-size: 1.8em;
+  text-align: center;
+  margin-bottom: 20px;
+  }
 
-  .sort-buttons button {
-  padding: 8px 16px;
-  font-size: 1em;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
-  transition: background-color 0.3s;
-  background-color: #0066cc;
-  color: white;
-  }
+  .sort-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  }
 
-  .sort-buttons button:hover {
-  background-color: #004999;
-  }
+  .sort-buttons button {
+  padding: 8px 16px;
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+  background-color: #0066cc;
+  color: white;
+  }
 
-  /* 机型列表 */
-  ul {
-  list-style-type: none;
-  padding: 0;
-  }
+  .sort-buttons button:hover {
+  background-color: #004999;
+  }
 
-  .year-item {
-  font-size: 1.2em;
-  font-weight: bold;
-  background-color: #e9ecef;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  }
+  /* 机型列表 */
+  ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%; /* 让列表宽度撑满容器 */
+  }
 
-  body.dark-mode .year-item {
-  background-color: #3a3a3a;
-  }
+  .year-item {
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #e9ecef;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  }
 
-  .model-sublist {
-  margin-left: 20px;
-  padding-left: 10px;
-  padding-top: 5px;
-  }
+  body.dark-mode .year-item {
+  background-color: #3a3a3a;
+  }
 
-  body.dark-mode .model-sublist {
-  }
+  .model-sublist {
+  margin-left: 20px;
+  padding-left: 10px;
+  padding-top: 5px;
+  }
 
-  ul li a {
-  text-decoration: none;
-  color: #0066cc;
-  }
+  body.dark-mode .model-sublist {
+  }
 
-  ul li a:hover {
-  color: #004999;
-  }
+  ul li a {
+  text-decoration: none;
+  color: #0066cc;
+  }
 
-  body.dark-mode ul li a {
-  color: #66aaff;
-  }
+  ul li a:hover {
+  color: #004999;
+  }
 
-  body.dark-mode ul li a:hover {
-  color: #4488dd;
-  }
-  </style>
- </head>
- <body>
-  <div class="container">
-  <h1>Xperia 机型目录</h1>
+  body.dark-mode ul li a {
+  color: #66aaff;
+  }
 
-  <div class="sort-buttons">
-  <button onclick="sortModels(true)">按年份升序</button>
-  <button onclick="sortModels(false)">按年份降序</button>
-  </div>
+  body.dark-mode ul li a:hover {
+  color: #4488dd;
+  }
+  </style>
+ </head>
+ <body>
+  <div class="container">
+  <img src="./media/hequ.png" alt="Xperia Logo" class="header-image">
+  <h1>Xperia 机型目录</h1>
 
-  <ul id="modelList"></ul>
-  </div>
+  <div class="sort-buttons">
+  <button onclick="sortModels(true)">按年份升序</button>
+  <button onclick="sortModels(false)">按年份降序</button>
+  </div>
 
-  <script>
-  const xperiaModels = [
-  { year: 2007, models: ["Xperia X1"] },
-  { year: 2008, models: ["Xperia X2"] },
-  { year: 2009, models: ["Xperia X10"] },
-  { year: 2010, models: ["Xperia Arc", "Xperia Play"] },
-  { year: 2011, models: ["Xperia Neo", "Xperia Pro"] },
-  { year: 2012, models: ["Xperia S", "Xperia U"] },
-  { year: 2013, models: ["Xperia Z1", "Xperia Z Ultra"] },
-  { year: 2014, models: ["Xperia Z2", "Xperia Z3"] },
-  { year: 2015, models: ["Xperia Z5"] },
-  { year: 2016, models: ["Xperia XZ"] },
-  { year: 2017, models: ["Xperia XZ1"] },
-  { year: 2018, models: ["Xperia XZ2"] },
-  { year: 2019, models: ["Xperia 1"] },
-  { year: 2020, models: ["Xperia 1 II","Xperia 5 II"] },
-  { year: 2021, models: ["Xperia Pro-I"] },
-  { year: 2022, models: ["Xperia 1 IV"] },
-  { year: 2023, models: ["Xperia 1 V","Xperia 5 V"] }
-  ];
+  <ul id="modelList"></ul>
+  </div>
 
-  function renderModels(models) {
-  const modelList = document.getElementById("modelList");
-  modelList.innerHTML = "";
+  <script>
+  const xperiaModels = [
+  { year: 2007, models: ["Xperia X1"] },
+  { year: 2008, models: ["Xperia X2"] },
+  { year: 2009, models: ["Xperia X10"] },
+  { year: 2010, models: ["Xperia Arc", "Xperia Play"] },
+  { year: 2011, models: ["Xperia Neo", "Xperia Pro"] },
+  { year: 2012, models: ["Xperia S", "Xperia U"] },
+  { year: 2013, models: ["Xperia Z1", "Xperia Z Ultra"] },
+  { year: 2014, models: ["Xperia Z2", "Xperia Z3"] },
+  { year: 2015, models: ["Xperia Z5"] },
+  { year: 2016, models: ["Xperia XZ"] },
+  { year: 2017, models: ["Xperia XZ1"] },
+  { year: 2018, models: ["Xperia XZ2"] },
+  { year: 2019, models: ["Xperia 1"] },
+  { year: 2020, models: ["Xperia 1 II","Xperia 5 II"] },
+  { year: 2021, models: ["Xperia Pro-I"] },
+  { year: 2022, models: ["Xperia 1 IV"] },
+  { year: 2023, models: ["Xperia 1 V","Xperia 5 V"] }
+  ];
 
-  models.forEach(item => {
-  const yearItem = document.createElement("li");
-  yearItem.className = "year-item";
-  yearItem.textContent = item.year;
+  function renderModels(models) {
+  const modelList = document.getElementById("modelList");
+  modelList.innerHTML = "";
 
-  const modelSubList = document.createElement("ul");
-  modelSubList.className = "model-sublist";
+  models.forEach(item => {
+  const yearItem = document.createElement("li");
+  yearItem.className = "year-item";
+  yearItem.textContent = item.year;
 
-  item.models.forEach(model => {
-  const modelItem = document.createElement("li");
-  const modelLink = document.createElement("a");
-  modelLink.href = `./models/${model.replace(/\s+/g, '').toLowerCase()}.html`;
-  modelLink.textContent = model;
-  modelItem.appendChild(modelLink);
-  modelSubList.appendChild(modelItem);
-  });
+  const modelSubList = document.createElement("ul");
+  modelSubList.className = "model-sublist";
 
-  modelList.appendChild(yearItem);
-  modelList.appendChild(modelSubList);
-  });
-  }
+  item.models.forEach(model => {
+  const modelItem = document.createElement("li");
+  const modelLink = document.createElement("a");
+  modelLink.href = `./models/${model.replace(/\s+/g, '').toLowerCase()}.html`;
+  modelLink.textContent = model;
+  modelItem.appendChild(modelLink);
+  modelSubList.appendChild(modelItem);
+  });
 
-  function sortModels(ascending) {
-  const sortedModels = [...xperiaModels].sort((a, b) =>
-  ascending ? a.year - b.year : b.year - a.year
-  );
-  renderModels(sortedModels);
-  }
+  modelList.appendChild(yearItem);
+  modelList.appendChild(modelSubList);
+  });
+  }
 
-  function toggleTheme() {
-  document.body.classList.toggle("dark-mode");
-  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-  }
+  function sortModels(ascending) {
+  const sortedModels = [...xperiaModels].sort((a, b) =>
+  ascending ? a.year - b.year : b.year - a.year
+  );
+  renderModels(sortedModels);
+  }
 
-  if (localStorage.getItem("theme") === "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) {
-  document.body.classList.add("dark-mode");
-  }
+  function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
+  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+  }
 
-  renderModels(xperiaModels);
-  </script>
- </body>
- </html>
+  if (localStorage.getItem("theme") === "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  document.body.classList.add("dark-mode");
+  }
+
+  renderModels(xperiaModels);
+  </script>
+ </body>
+ </html>
