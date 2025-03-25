@@ -1,133 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xperia 机型</title>
+    <title>Xperia 机型 - 目录</title>
     <style>
-        /* 全局样式 */
+        /* Wikipedia 风格 */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
+            font-family: 'Georgia', serif;
+            background-color: #ffffff;
+            color: #222;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* 暗色模式 */
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: #ddd;
         }
 
         .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
-        }
-
-        h1 {
-            font-size: 2em;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #444;
-        }
-
-        .sort-buttons {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .sort-buttons button {
-            padding: 10px 20px;
-            font-size: 1em;
-            margin: 0 10px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
+            width: 95%;
+            max-width: 800px;
+            background: #f8f9fa;
+            padding: 20px;
             border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
         }
 
-        .sort-buttons button:hover {
-            background-color: #0056b3;
+        body.dark-mode .container {
+            background: #2a2a2a;
         }
 
+        h1 {
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sort-buttons, .theme-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .sort-buttons button, .theme-toggle button {
+            padding: 8px 16px;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        .sort-buttons button {
+            background-color: #0066cc;
+            color: white;
+        }
+
+        .sort-buttons button:hover {
+            background-color: #004999;
+        }
+
+        .theme-toggle button {
+            background-color: #444;
+            color: white;
+        }
+
+        body.dark-mode .theme-toggle button {
+            background-color: #aaa;
+            color: #222;
+        }
+
+        /* 机型列表 */
         ul {
             list-style-type: none;
             padding: 0;
         }
 
-        ul li {
-            margin: 10px 0;
-            font-size: 1.1em;
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: #007BFF;
-        }
-
-        ul li a:hover {
-            color: #0056b3;
-        }
-
-        /* 年份和机型分层 */
         .year-item {
-            margin-bottom: 15px;
-            font-weight: bold;
             font-size: 1.2em;
-            background-color: rgba(220, 220, 220, 0.8);
+            font-weight: bold;
+            background-color: #e9ecef;
             padding: 10px;
-            border-radius: 8px;
+            border-radius: 5px;
+            margin-bottom: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode .year-item {
+            background-color: #3a3a3a;
+        }
+
+        .year-item:hover {
+            background-color: #d6d8db;
+        }
+
+        body.dark-mode .year-item:hover {
+            background-color: #505050;
         }
 
         .model-sublist {
             margin-left: 20px;
             padding-left: 10px;
             display: none;
+            border-left: 2px solid #ccc;
+            padding-top: 5px;
+        }
+
+        body.dark-mode .model-sublist {
+            border-left-color: #555;
         }
 
         .year-item.active .model-sublist {
             display: block;
         }
 
-        /* 硬件参数表格 */
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
+        ul li a {
+            text-decoration: none;
+            color: #0066cc;
         }
 
-        table th, table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
+        ul li a:hover {
+            color: #004999;
         }
 
-        table th {
-            background-color: #f1f1f1;
-            color: #555;
+        body.dark-mode ul li a {
+            color: #66aaff;
         }
 
-        table td {
-            background-color: #fafafa;
+        body.dark-mode ul li a:hover {
+            color: #4488dd;
         }
-
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Xperia 机型</h1>
-        <div class="sort-buttons">
-            <button onclick="sortModels(true)">按年份升序排序</button>
-            <button onclick="sortModels(false)">按年份降序排序</button>
+        <h1>Xperia 机型目录</h1>
+        
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()">切换暗色模式</button>
         </div>
+
+        <div class="sort-buttons">
+            <button onclick="sortModels(true)">按年份升序</button>
+            <button onclick="sortModels(false)">按年份降序</button>
+        </div>
+
         <ul id="modelList"></ul>
     </div>
 
@@ -155,7 +183,8 @@
         function renderModels(models) {
             const modelList = document.getElementById("modelList");
             modelList.innerHTML = "";
-            models.forEach(item => {
+
+            models.forEach((item, index) => {
                 const yearItem = document.createElement("li");
                 yearItem.className = "year-item";
                 yearItem.textContent = item.year;
@@ -166,32 +195,8 @@
                 item.models.forEach(model => {
                     const modelItem = document.createElement("li");
                     const modelLink = document.createElement("a");
-
-                    // 转换为页面路径格式：将空格去除并小写
-                    const modelPath = model.replace(/\s+/g, '').toLowerCase() + '.html';
-                    modelLink.href = `./models/${modelPath}`;  // 设置跳转链接
-
+                    modelLink.href = `./models/${model.replace(/\s+/g, '').toLowerCase()}.html`;
                     modelLink.textContent = model;
-
-                    // 在点击链接时检查该页面是否存在
-                    modelLink.addEventListener('click', function (event) {
-                        event.preventDefault();
-                        const xhr = new XMLHttpRequest();
-                        xhr.open('HEAD', modelLink.href, true);
-                        xhr.onreadystatechange = function () {
-                            if (xhr.readyState === 4) {
-                                if (xhr.status === 200) {
-                                    // 页面存在，跳转
-                                    window.location.href = modelLink.href;
-                                } else {
-                                    // 页面不存在，弹出提示
-                                    alert(`${model} 页面不存在蛆都不剩`);
-                                }
-                            }
-                        };
-                        xhr.send();
-                    });
-
                     modelItem.appendChild(modelLink);
                     modelSubList.appendChild(modelItem);
                 });
@@ -199,21 +204,32 @@
                 yearItem.appendChild(modelSubList);
                 modelList.appendChild(yearItem);
 
-                // Add click event to toggle visibility of model list
-                yearItem.addEventListener('click', () => {
-                    yearItem.classList.toggle('active');
+                if (index === models.length - 1) {
+                    yearItem.classList.add("active");
+                }
+
+                yearItem.addEventListener("click", () => {
+                    yearItem.classList.toggle("active");
                 });
             });
         }
 
         function sortModels(ascending) {
-            const sortedModels = [...xperiaModels].sort((a, b) =>
+            const sortedModels = [...xperiaModels].sort((a, b) => 
                 ascending ? a.year - b.year : b.year - a.year
             );
             renderModels(sortedModels);
         }
 
-        // Default rendering (ascending order)
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+        }
+
+        if (localStorage.getItem("theme") === "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.body.classList.add("dark-mode");
+        }
+
         renderModels(xperiaModels);
     </script>
 </body>
