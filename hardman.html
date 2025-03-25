@@ -1,0 +1,223 @@
+<html><body><html><body><!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xperia 机型页面</title>
+    <style>
+        /* 颜色 & 变量 */
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --border-color: #ccc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* 暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #181818;
+                --text-color: #eee;
+                --border-color: #444;
+                --card-bg: rgba(40, 40, 40, 0.9);
+                --shadow-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* 全局样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            font-size: 1.4em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--border-color);
+            color: white;
+        }
+
+        /* 颜色模块 */
+        .color-box {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+
+        /* 图片框样式 */
+        .image-box {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="section">
+        <h2>Xperia 1 V</h2>
+        <p><strong>Xperia 1 V</strong></p>
+        <p>Xperia 1 V是Xperia 1系列第五代智能手机。该手机在2023年发布，该机搭载了骁龙8Gen2 SOC，改善了发热和续航，同时也升级了摄像头与传感器，首次在主摄上应用Exmor T传感器。</p>
+        <div class="image-box">
+            <img src="../picture/xperia1v.jpg" alt="Xperia 1V图片">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>硬件参数</h2>
+        <table>
+            <tr>
+                <th>参数</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>SoC</td>
+                <td>Qualcomm Snapdragon 8 Gen2</td>
+            </tr>
+ <tr>
+                <td>网络制式</td>
+                <td>2G,3G,4G,5G</td>
+            </tr>
+            <tr>
+                <td>RAM</td>
+                <td>12GB/16GB</td>
+            </tr>
+            <tr>
+                <td>ROM</td>
+                <td>256GB/512GB (可通过SD卡拓展至1TB)</td>
+            </tr>
+            <tr>
+                <td>屏幕分辨率</td>
+                <td>3840X1644(4K HDR OLED)</td>
+            </tr>
+            <tr>
+                <td>屏幕材质</td>
+                <td>OLED</td>
+            </tr>
+            <tr>
+                <td>防水等级</td>
+                <td>IP68</td>
+            </tr>
+            <tr>
+                <td>相机</td>
+
+                <td>12 MP 主摄像头 + 48 MP 广角摄像头 + 12 MP 长焦摄像头</td>
+            </tr>
+            <tr>
+                <td>电池大小</td>
+                <td>5000mAh</td>
+            </tr>
+            <tr>
+                <td>充电功率</td>
+                <td>30W (MicroUSB)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>软件系统</h2>
+        <table>
+            <tr>
+                <th>系统版本</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>出厂 Android 版本</td>
+                <td>Android 13</td>
+            </tr>
+            <tr>
+                <td>可升级至</td>
+                <td>Android 15</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>颜色</h2>
+        <table>
+            <tr>
+                <th>颜色</th>
+                <th>名称</th>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #494746;"></span></td>
+                <td>墨黑</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #AFB2B5;"></span></td>
+                <td>雾银</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color:#646B55"></span></td>
+                <td>苍绿</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>轶事 </h2>
+        <p>该机阉割了前置距离传感器，不再会根据前遮挡物来判断亮灭。而是只能通过抬手或者是常亮。并且防止口袋误触也可能受到影响（尽管索尼的防止口袋误触做的本身比较辣鸡）</p>
+        <p>该机有机主反应摄像头歪，是因为镜头模组尺寸的原因，空间不足被迫错位。所以注意到此现象非手机质量问题。</p>
+<p>这代照比IV代有了后背颗粒纹理以及边框类似于Xperia PRO I那样的波浪纹理。</p>
+
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
+</body></html></body></html>
