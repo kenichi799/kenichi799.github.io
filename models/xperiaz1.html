@@ -1,0 +1,219 @@
+<html><body><!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xperia 机型页面</title>
+    <style>
+        /* 颜色 & 变量 */
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --border-color: #ccc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* 暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #181818;
+                --text-color: #eee;
+                --border-color: #444;
+                --card-bg: rgba(40, 40, 40, 0.9);
+                --shadow-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* 全局样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            font-size: 1.4em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--border-color);
+            color: white;
+        }
+
+        /* 颜色模块 */
+        .color-box {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+
+        /* 图片框样式 */
+        .image-box {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="section">
+        <h2>Xperia Z1</h2>
+        <p><strong>Xperia Z1</strong></p>
+        <p>索尼 Xperia Z1 于 2013 年 9 月 4 日在德国 IFA 大会正式发布，作为 Z 系列的第一款，它的中框采用了无断点全金属设计，并且搭载了当时旗舰 SoC 骁龙 800。并且其方正的设计语言，成为了以后 Z 系列机型的统一语言，成为了一代经典机型。</p>
+        <div class="image-box">
+            <img src="../picture/xperiaz1jpg" alt="Xperia Z1图片">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>硬件参数</h2>
+        <table>
+            <tr>
+                <th>参数</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>SoC</td>
+                <td>Qualcomm Snapdragon 800</td>
+            </tr>
+            <tr>
+                <td>RAM</td>
+                <td>2GB</td>
+            </tr>
+            <tr>
+                <td>ROM</td>
+                <td>16GB (可通过SD卡拓展至64GB)</td>
+            </tr>
+            <tr>
+                <td>屏幕分辨率</td>
+                <td>1920 × 1080 (Full HD)</td>
+            </tr>
+            <tr>
+                <td>屏幕材质</td>
+                <td>TFT</td>
+            </tr>
+            <tr>
+                <td>防水等级</td>
+                <td>IP58</td>
+            </tr>
+            <tr>
+                <td>相机</td>
+                <td>20.7MP(后置)+0.2MP(前置)</td>
+            </tr>
+            <tr>
+                <td>电池大小</td>
+                <td>3000mAh</td>
+            </tr>
+            <tr>
+                <td>充电功率</td>
+                <td>15W (MicroUSB)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>软件系统</h2>
+        <table>
+            <tr>
+                <th>系统版本</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>出厂 Android 版本</td>
+                <td>Android 4.2</td>
+            </tr>
+            <tr>
+                <td>可升级至</td>
+                <td>Android 6.0</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>颜色</h2>
+        <table>
+            <tr>
+                <th>颜色</th>
+                <th>名称</th>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #000000;"></span></td>
+                <td>黑色</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #FFFFFF;"></span></td>
+                <td>白色</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #7745A4;"></span></td>
+                <td>红色</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>轶事 </h2>
+        <p>该机型曾经爆出过机身弯曲的现象，一用户在正常使用过程中，发现了机身莫名弯曲，类似于 iPhone 6，此后也有用户陆陆续续地爆出类似的现象。索尼移动方面并没有做出回应，但是为其提供了维修</p>
+        <p>这是索尼第一款无断点金属边框</p>
+<p>Z1 的按键设计的设计灵感来自于电子腕表</p>
+<p>该机型国际版支持 LTE ，国行不然</p>
+<p>该机型为 Xperia 首部支持外接镜头的设备，两款手机外接镜头设备型号为 DSC-QX100 与 QX10。该镜头系列为 SmartShot，支持光学防抖，能够使用 NFC/ Wi-Fi 匹配所有智能手机，并利用索尼独家的 PlayMemories 应用进行完整控制。支持拍摄 1080P 30 FPS 规格的 MP4 格式视频</p>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
+</body></html>
