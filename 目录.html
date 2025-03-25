@@ -6,123 +6,160 @@
   <title>Xperia 机型 - 目录</title>
   <style>
   /* Wikipedia 风格 */
-  body {
-  font-family: 'Georgia', serif;
-  background-color: #ffffff;
-  color: #222;
-  margin: 0;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  transition: background-color 0.3s, color 0.3s;
-  }
+  /* Wikipedia 风格 + 花哨升级 */
+  body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(to bottom, #ffffff, #f4f4f4); /* 添加渐变背景 */
+    color: #222;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    transition: background 0.4s, color 0.4s;
+  }
 
-  /* 暗色模式 */
-  body.dark-mode {
-  background-color: #1e1e1e;
-  color: #ddd;
-  }
+  /* 暗色模式 */
+  body.dark-mode {
+    background: linear-gradient(to bottom, #1e1e1e, #121212); /* 暗色模式更深邃 */
+    color: #ddd;
+  }
 
-  .container {
-  width: 95%;
-  max-width: 800px;
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s;
-  display: flex;
-  flex-direction: column; /* 使容器内的元素垂直排列 */
-  align-items: center; /* 使容器内的元素水平居中 */
-  }
+  .container {
+    width: 95%;
+    max-width: 800px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* 更明显的阴影层次 */
+    transition: background-color 0.4s, box-shadow 0.4s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd; /* 增加轻微的边框，增强层次 */
+  }
 
-  body.dark-mode .container {
-  background: #2a2a2a;
-  }
+  body.dark-mode .container {
+    background: #292929;
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.1);
+    border-color: #444;
+  }
 
-  .header-image {
-  width: 100%; /* 让图片宽度撑满容器 */
-  max-height: 200px; /* 设置最大高度，防止图片过大 */
-  object-fit: contain; /* 保持图片比例，适应容器 */
-  margin-bottom: 15px; /* 图片与标题之间留出间距 */
-  border-radius: 5px; /* 可选：添加圆角 */
-  }
+  .header-image {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover; /* 改为 cover，让图片铺满 */
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+  }
 
-  h1 {
-  font-size: 1.8em;
-  text-align: center;
-  margin-bottom: 20px;
-  }
+  .header-image:hover {
+    transform: scale(1.03); /* 轻微放大图片，增加动态感 */
+  }
 
-  .sort-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  }
+  h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #004499;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  }
 
-  .sort-buttons button {
-  padding: 8px 16px;
-  font-size: 1em;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
-  transition: background-color 0.3s;
-  background-color: #0066cc;
-  color: white;
-  }
+  body.dark-mode h1 {
+    color: #66aaff;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.1);
+  }
 
-  .sort-buttons button:hover {
-  background-color: #004999;
-  }
+  /* 按钮美化 */
+  .sort-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
 
-  /* 机型列表 */
-  ul {
-  list-style-type: none;
-  padding: 0;
-  width: 100%; /* 让列表宽度撑满容器 */
-  }
+  .sort-buttons button {
+    padding: 10px 18px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #0073e6, #005bb5);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background 0.3s;
+  }
 
-  .year-item {
-  font-size: 1.2em;
-  font-weight: bold;
-  background-color: #e9ecef;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  }
+  .sort-buttons button:hover {
+    background: linear-gradient(135deg, #005bb5, #003d82);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  }
 
-  body.dark-mode .year-item {
-  background-color: #3a3a3a;
-  }
+  /* 机型列表 */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+  }
 
-  .model-sublist {
-  margin-left: 20px;
-  padding-left: 10px;
-  padding-top: 5px;
-  }
+  .year-item {
+    font-size: 1.2em;
+    font-weight: bold;
+    background: linear-gradient(to right, #e9ecef, #d7dce3);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s;
+  }
 
-  body.dark-mode .model-sublist {
-  }
+  .year-item:hover {
+    background: linear-gradient(to right, #d7dce3, #bcc0c7);
+  }
 
-  ul li a {
-  text-decoration: none;
-  color: #0066cc;
-  }
+  body.dark-mode .year-item {
+    background: linear-gradient(to right, #3a3a3a, #2c2c2c);
+  }
 
-  ul li a:hover {
-  color: #004999;
-  }
+  .model-sublist {
+    margin-left: 20px;
+    padding-left: 15px;
+    padding-top: 5px;
+    border-left: 3px solid #0073e6; /* 竖线装饰 */
+    transition: border-color 0.3s;
+  }
 
-  body.dark-mode ul li a {
-  color: #66aaff;
-  }
+  body.dark-mode .model-sublist {
+    border-left-color: #66aaff;
+  }
 
-  body.dark-mode ul li a:hover {
-  color: #4488dd;
-  }
+  /* 文字链接 */
+  ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #0073e6;
+    transition: color 0.3s;
+  }
+
+  ul li a:hover {
+    color: #003d82;
+    text-decoration: underline;
+  }
+
+  body.dark-mode ul li a {
+    color: #66aaff;
+  }
+
+  body.dark-mode ul li a:hover {
+    color: #4488dd;
+  }
+
   </style>
  </head>
  <body>
