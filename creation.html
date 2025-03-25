@@ -8,11 +8,105 @@
 	<meta name="changed" content="2025-03-25T10:47:20.225728800"/>
 	<meta name="" content=""/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<style type="text/css">
-		h1 { color: #333333; orphans: 100; margin-bottom: 0.53cm }
+<style type="text/css">
+		body {
+			font-family: sans-serif; /* 使用更通用的无衬线字体 */
+			color: #333; /* 更柔和的文本颜色 */
+			background-color: #f8f9fa; /* 维基百科的浅灰色背景 */
+			line-height: 1.6; /* 增加行高以提高可读性 */
+			margin: 20px; /* 增加一些外边距 */
+		}
+
+		h1 {
+			color: #202122; /* 维基百科标题颜色 */
+			orphans: 100;
+			margin-bottom: 0.5em; /* 使用em单位以适应字体大小 */
+			font-size: 1.8em; /* 稍微调整标题大小 */
+			border-bottom: 1px solid #a2a9b1; /* 维基百科标题下的细线 */
+			padding-bottom: 0.3em;
+		}
+
 		h1.cjk { font-family: "Arial", sans-serif }
 		h1.ctl { font-family: "Arial", sans-serif }
-		p { color: #333333; font-family: "Arial", sans-serif; orphans: 100 }
+
+		h2 {
+			color: #202122;
+			font-size: 1.5em;
+			margin-top: 1.5em;
+			margin-bottom: 0.5em;
+			border-bottom: 1px solid #a2a9b1;
+			padding-bottom: 0.2em;
+		}
+
+		h3 {
+			color: #202122;
+			font-size: 1.2em;
+			margin-top: 1.2em;
+			margin-bottom: 0.5em;
+		}
+
+		p {
+			color: #333;
+			font-family: sans-serif;
+			orphans: 100;
+			margin-bottom: 1em;
+		}
+
+		ul, ol {
+			margin-bottom: 1em;
+			padding-left: 20px;
+		}
+
+		li {
+			margin-bottom: 0.5em;
+		}
+
+		a {
+			color: #0645ad; /* 维基百科链接颜色 */
+			text-decoration: none;
+			transition: color 0.3s ease; /* 平滑的颜色过渡效果 */
+		}
+
+		a:hover {
+			color: #0b0080; /* 鼠标悬停时的链接颜色 */
+			text-decoration: underline; /* 鼠标悬停时显示下划线 */
+		}
+
+		hr {
+			border: 1px solid #a2a9b1; /* 维基百科分隔线样式 */
+			margin: 1em 0;
+		}
+
+		blockquote {
+			color: #54595d; /* 维基百科引用文本颜色 */
+			border-left: 3px solid #a2a9b1; /* 维基百科引用左侧的粗线 */
+			padding: 0.5em 1em;
+			margin: 1em 0;
+			background-color: #f9f9f9; /* 浅灰色背景 */
+		}
+
+		pre {
+			background-color: #f9f9f9;
+			border: 1px solid #ccc;
+			padding: 1em;
+			margin: 1em 0;
+			overflow: auto; /* 如果代码过长则显示滚动条 */
+			font-family: monospace; /* 使用等宽字体 */
+			line-height: 1.4;
+		}
+
+		/* 更明显的列表项标记 */
+		ul li::before {
+			content: "•";
+			color: #36c;
+			display: inline-block;
+			width: 1em;
+			margin-left: -1em;
+		}
+
+		ol li::marker {
+			color: #36c;
+		}
 	</style>
 </head>
 <body lang="zh-CN" text="#333333" bgcolor="#f9f9f9" dir="ltr"><h1 class="cjk" align="center" style="margin-top: 1.32cm; margin-bottom: 0.5cm">
