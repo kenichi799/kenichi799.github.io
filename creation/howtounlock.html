@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>如何解锁 Xperia 设备的 bootloader</title>
+	<meta name="generator" content="LibreOffice 25.2.0.3 (Windows)"/>
+	<meta name="created" content="2025-03-25T10:50:32.576053600"/>
+	<meta name="changed" content="2025-03-25T11:10:49.777561000"/>
+</head>
+<body lang="zh-CN" dir="ltr"><h1>如何解锁 <font face="Liberation Sans, sans-serif"><span lang="en-US">Xperia
+</span></font>设备的 <font face="Liberation Sans, sans-serif"><span lang="en-US">bootloader</span></font></h1>
+<p>请注意，解锁您<font face="Liberation Serif, serif"><span lang="en-US">Xperia</span></font>设备的<font face="Liberation Serif, serif"><span lang="en-US">bootloader</span></font>将会清除设备上的所有数据，并且可能会使您的保修失效。此过程通常建议高级用户进行。请谨慎操作，风险自负。</p>
+<h2>重要注意事项 <font face="Liberation Serif, serif"><span lang="en-US">(</span></font>请仔细阅读<font face="Liberation Serif, serif"><span lang="en-US">):</span></font></h2>
+<ul>
+	<li><p style="margin-bottom: 0cm"><strong>数据丢失<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>解锁<font face="Liberation Serif, serif"><span lang="en-US">bootloader</span></font>将擦除设备上的所有数据。在继续之前，请务必将您的所有重要数据（照片、视频、联系人等）备份到您的电脑或外部存储设备。
+		</p></li>
+	<li><p style="margin-bottom: 0cm"><font face="Liberation Serif, serif"><span lang="en-US"><strong>DRM</span></font>密钥<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>解锁<font face="Liberation Serif, serif"><span lang="en-US">bootloader</span></font>还会清除存储在<font face="Liberation Serif, serif"><span lang="en-US">TA</span></font>分区中的<font face="Liberation Serif, serif"><span lang="en-US">DRM</span></font>密钥。这可能会影响某些索尼专有功能，例如相机后期处理、色彩配置文件、降噪、<font face="Liberation Serif, serif"><span lang="en-US">X-Reality</span></font>视频增强、<font face="Liberation Serif, serif"><span lang="en-US">DSEE
+	HX</span></font>、<font face="Liberation Serif, serif"><span lang="en-US">ClearAudio+</span></font>以及对<font face="Liberation Serif, serif"><span lang="en-US">HD
+	Netflix</span></font>的<font face="Liberation Serif, serif"><span lang="en-US">Widevine
+	L1</span></font>支持。即使您重新锁定<font face="Liberation Serif, serif"><span lang="en-US">bootloader</span></font>，这些密钥也<strong>无法恢复</strong>。
+		</p></li>
+	<li><p style="margin-bottom: 0cm"><strong>保修<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>解锁<font face="Liberation Serif, serif"><span lang="en-US">bootloader</span></font>可能会使您的设备保修失效。
+		</p></li>
+	<li><p><strong>重新锁定<font face="Liberation Serif, serif"><span lang="en-US">Bootloader:</strong>
+	</span></font>只有在所有内容都是原厂状态（原始固件）的情况下，您才能重新锁定<font face="Liberation Serif, serif"><span lang="en-US">bootloader</span></font>。否则，您可能会面临数据丢失甚至设备变砖的风险。
+		</p></li>
+</ul>
+<h2>准备工作<font face="Liberation Serif, serif"><span lang="en-US">:</span></font></h2>
+<ol>
+	<li><p style="margin-bottom: 0cm"><strong>检查是否允许解锁<font face="Liberation Serif, serif"><span lang="en-US">Bootloader:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p style="margin-bottom: 0cm">在您的手机上打开拨号器。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">输入 <font face="Liberation Serif, serif"><span lang="en-US"><code>*#*#7378423#*#*</code>
+		</span></font>以访问服务菜单。 
+		</p></li>
+		<li><p style="margin-bottom: 0cm">点击 <font face="Liberation Serif, serif"><span lang="en-US"><strong>Service
+		info</strong> &gt; <strong>Configuration</strong> &gt; <strong>Rooting
+		Status</strong></span></font>。 
+		</p></li>
+		<li><p style="margin-bottom: 0cm">如果 <font face="Liberation Serif, serif"><span lang="en-US"><strong>Bootloader
+		unlock allowed</strong> </span></font>显示为 <font face="Liberation Serif, serif"><span lang="en-US"><strong>Yes</strong></span></font>，则您可以继续下一步。如果显示为
+		<font face="Liberation Serif, serif"><span lang="en-US"><strong>No</strong>
+		</span></font>或状态缺失，则您的设备无法使用此方法解锁。
+				</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>下载并安装<font face="Liberation Serif, serif"><span lang="en-US">USB</span></font>驱动程序<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p style="margin-bottom: 0cm">访问索尼开发者官方网站下载适用于您特定<font face="Liberation Serif, serif"><span lang="en-US">Xperia</span></font>型号的<font face="Liberation Serif, serif"><span lang="en-US">USB</span></font>驱动程序<font face="Liberation Serif, serif"><span lang="en-US">:
+		<a href="https://developer.sony.com/open-source/aosp-on-xperia-open-devices/downloads/drivers" target="_blank">https://developer.sony.com/open-source/aosp-on-xperia-open-devices/downloads/drivers</a>
+		</span></font>
+		</p></li>
+		<li><p style="margin-bottom: 0cm">在您的电脑上安装驱动程序。
+				</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>下载并解压<font face="Liberation Serif, serif"><span lang="en-US">ADB</span></font>和<font face="Liberation Serif, serif"><span lang="en-US">Fastboot</span></font>工具<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p style="margin-bottom: 0cm">从<font face="Liberation Serif, serif"><span lang="en-US">Google</span></font>下载平台工具（包含<font face="Liberation Serif, serif"><span lang="en-US">ADB</span></font>和<font face="Liberation Serif, serif"><span lang="en-US">Fastboot</span></font>）<font face="Liberation Serif, serif"><span lang="en-US">:
+		<a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip" target="_blank">https://dl.google.com/android/repository/platform-tools-latest-windows.zip</a>
+		</span></font>
+		</p></li>
+		<li><p style="margin-bottom: 0cm">将<font face="Liberation Serif, serif"><span lang="en-US">ZIP</span></font>文件的内容解压到您电脑上的一个文件夹中（例如：<font face="Liberation Serif, serif"><span lang="en-US"><code>C:\platform-tools</code></span></font>）。
+				</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>配置<font face="Liberation Serif, serif"><span lang="en-US">ADB</span></font>环境变量
+	<font face="Liberation Serif, serif"><span lang="en-US">(</span></font>可选但推荐<font face="Liberation Serif, serif"><span lang="en-US">):</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p style="margin-bottom: 0cm">这允许您从任何命令提示符窗口运行<font face="Liberation Serif, serif"><span lang="en-US">ADB</span></font>命令。
+				</p></li>
+		<li><p style="margin-bottom: 0cm"><font face="Liberation Serif, serif"><span lang="en-US"><strong>Windows
+		10 </span></font>及以上版本<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+		</span></font>按下 <font face="Liberation Serif, serif"><span lang="en-US">Windows
+		</span></font>键，输入“环境变量”，然后选择“编辑系统环境变量”。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">在“系统属性”窗口中，点击“环境变量<font face="Liberation Serif, serif"><span lang="en-US">...”</span></font>按钮。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">在“系统变量”部分，找到名为“<font face="Liberation Serif, serif"><span lang="en-US">Path”</span></font>的变量并选中它。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">点击“编辑<font face="Liberation Serif, serif"><span lang="en-US">...”</span></font>按钮。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">在“编辑环境变量”窗口中，点击“新建”，然后添加您解压平台工具的目录的<strong>绝对路径</strong>（例如：<font face="Liberation Serif, serif"><span lang="en-US"><code>C:\platform-tools</code></span></font>）。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">点击所有打开的窗口中的“确定”以保存更改。
+				</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>在您的<font face="Liberation Serif, serif"><span lang="en-US">Xperia</span></font>设备上启用<font face="Liberation Serif, serif"><span lang="en-US">USB</span></font>调试和<font face="Liberation Serif, serif"><span lang="en-US">OEM</span></font>解锁<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p style="margin-bottom: 0cm">转到 <strong>设置</strong> <font face="Liberation Serif, serif"><span lang="en-US">&gt;
+		</span></font><strong>系统</strong> <font face="Liberation Serif, serif"><span lang="en-US">&gt;
+		</span></font><strong>关于手机</strong>。 
+		</p></li>
+		<li><p style="margin-bottom: 0cm">连续快速点击 <strong>版本号</strong>
+		（通常点击<font face="Liberation Serif, serif"><span lang="en-US">7</span></font>次），直到看到“您现在是开发者！”的消息。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">返回到 <strong>设置</strong>
+		<font face="Liberation Serif, serif"><span lang="en-US">&gt; </span></font><strong>系统</strong>
+		<font face="Liberation Serif, serif"><span lang="en-US">&gt; </span></font><strong>高级</strong>
+		<font face="Liberation Serif, serif"><span lang="en-US">&gt; </span></font><strong>开发者选项</strong>。
+				</p></li>
+		<li><p style="margin-bottom: 0cm"><strong>启用</strong> <font face="Liberation Serif, serif"><span lang="en-US"><strong>USB</span></font>调试</strong>
+		选项。 
+		</p></li>
+		<li><p style="margin-bottom: 0cm"><strong>启用</strong> <font face="Liberation Serif, serif"><span lang="en-US"><strong>OEM</span></font>解锁</strong>
+		选项（如果可用）。 
+		</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>将您的<font face="Liberation Serif, serif"><span lang="en-US">Xperia</span></font>设备连接到电脑<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p style="margin-bottom: 0cm">使用<font face="Liberation Serif, serif"><span lang="en-US">USB</span></font>数据线将您的手机连接到电脑。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">在您的手机上，您可能会看到一个提示询问是否允许<font face="Liberation Serif, serif"><span lang="en-US">USB</span></font>调试。勾选“始终允许来自此计算机”，然后点击“允许”。
+				</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>打开命令提示符或终端<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p style="margin-bottom: 0cm">打开命令提示符窗口（在<font face="Liberation Serif, serif"><span lang="en-US">Windows</span></font>上）或终端（在<font face="Liberation Serif, serif"><span lang="en-US">macOS</span></font>或<font face="Liberation Serif, serif"><span lang="en-US">Linux</span></font>上）。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">使用 <font face="Liberation Serif, serif"><span lang="en-US"><code>cd</code>
+		</span></font>命令导航到您解压平台工具的目录。例如，如果您解压到
+		<font face="Liberation Serif, serif"><span lang="en-US"><code>C:\platform-tools</code></span></font>，则输入
+		<font face="Liberation Serif, serif"><span lang="en-US"><code>cd
+		C:\platform-tools</code> </span></font>并按<font face="Liberation Serif, serif"><span lang="en-US">Enter</span></font>键。
+				</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>进入<font face="Liberation Serif, serif"><span lang="en-US">Fastboot</span></font>模式<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p style="margin-bottom: 0cm">进入<font face="Liberation Serif, serif"><span lang="en-US">Fastboot</span></font>模式的方法可能因您的<font face="Liberation Serif, serif"><span lang="en-US">Xperia</span></font>型号而略有不同。以下是一种常见方法：
+				</p></li>
+		<li><p style="margin-bottom: 0cm">完全关闭您的手机。 
+		</p></li>
+		<li><p style="margin-bottom: 0cm">按住 <strong>音量增大</strong>
+		按钮。 
+		</p></li>
+		<li><p style="margin-bottom: 0cm">在按住音量增大按钮的同时，通过<font face="Liberation Serif, serif"><span lang="en-US">USB</span></font>数据线将您的手机连接到电脑。
+				</p></li>
+		<li><p style="margin-bottom: 0cm">继续按住音量增大按钮，直到您的手机进入<font face="Liberation Serif, serif"><span lang="en-US">Fastboot</span></font>模式。您可能会看到黑屏或<font face="Liberation Serif, serif"><span lang="en-US">Fastboot</span></font>标志。
+				</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>使用<font face="Liberation Serif, serif"><span lang="en-US">Fastboot</span></font>命令解锁<font face="Liberation Serif, serif"><span lang="en-US">Bootloader:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p>在命令提示符或终端窗口中，输入以下命令并按<font face="Liberation Serif, serif"><span lang="en-US">Enter</span></font>键<font face="Liberation Serif, serif"><span lang="en-US">:
+		</span></font>
+		</p>
+		<pre style="margin-bottom: 0.5cm"><font face="Liberation Mono, monospace"><span lang="en-US"><code>fastboot oem unlock</code></span></font></pre></li>
+		<li><p><strong>注意<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+		</span></font>在某些较新的<font face="Liberation Serif, serif"><span lang="en-US">Xperia</span></font>设备上，您可能需要从索尼开发者网站获取解锁码。在这种情况下，命令将是：
+				</p>
+		<pre style="margin-bottom: 0.5cm"><font face="Liberation Mono, monospace"><span lang="en-US"><code>fastboot oem unlock 0x</span></font>您的解锁码</code></pre><p style="margin-bottom: 0cm">
+		您需要将 <code>您的解锁码</code>
+		替换为您从索尼收到的代码。请查阅您的特定设备的官方索尼文档。
+				</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>按照屏幕上的指示操作<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p style="margin-bottom: 0cm">您的手机现在应该会显示有关如何确认<font face="Liberation Serif, serif"><span lang="en-US">bootloader</span></font>解锁的说明。使用音量和电源按钮进行导航和确认。
+				</p></li>
+	</ul>
+	<li><p style="margin-bottom: 0cm"><strong>重启您的设备<font face="Liberation Serif, serif"><span lang="en-US">:</strong>
+	</span></font>
+	</p>
+	<ul>
+		<li><p><font face="Liberation Serif, serif"><span lang="en-US">bootloader</span></font>解锁后，您的设备可能会自动重启。如果不是，您可以在命令提示符<font face="Liberation Serif, serif"><span lang="en-US">/</span></font>终端中使用命令
+		<font face="Liberation Serif, serif"><span lang="en-US"><code>fastboot
+		reboot</code></span></font>。 
+		</p></li>
+	</ul>
+</ol>
+<h2>重要提示<font face="Liberation Serif, serif"><span lang="en-US">:</span></font></h2>
+<ul>
+	<li><p style="margin-bottom: 0cm">确切的步骤和命令可能因您的特定<font face="Liberation Serif, serif"><span lang="en-US">Xperia</span></font>设备型号和<font face="Liberation Serif, serif"><span lang="en-US">Android</span></font>版本而略有不同。
+		</p></li>
+	<li><p>始终参考索尼开发者官方网站以获取您设备的最新和最准确的说明<font face="Liberation Serif, serif"><span lang="en-US">:
+	<a href="https://developer.sony.com/open-source/aosp-on-xperia-open-devices/get-started/unlock-bootloader/" target="_blank">https://developer.sony.com/open-source/aosp-on-xperia-open-devices/get-started/unlock-bootloader/</a>
+	</span></font>
+	</p></li>
+</ul>
+<p>通过继续执行这些步骤，您承认所涉及的风险，并对可能出现的任何问题负责。</p>
+</body>
+</html>
