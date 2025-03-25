@@ -17,6 +17,26 @@
 			margin: 20px; /* 增加一些外边距 */
 		}
 
+		/* 新增的图片框样式 */
+		.image-container {
+			width: 100%;
+			margin-bottom: 20px; /* 图片下方留出一些空间 */
+			overflow: hidden; /* 防止图片溢出容器 */
+		}
+
+		.image-container img {
+			display: block; /* 移除图片底部的额外空间 */
+			width: 100%; /* 让图片宽度撑满容器 */
+			height: auto; /* 保持图片宽高比 */
+		}
+
+		/* 响应式布局 */
+		@media (max-width: 768px) {
+			.image-container {
+				margin-bottom: 15px;
+			}
+		}
+
 		h1 {
 			color: #202122; /* 维基百科标题颜色 */
 			orphans: 100;
@@ -108,6 +128,7 @@
 			color: #36c;
 		}
 	</style>
+
 </head>
 <body lang="zh-CN" text="#333333" bgcolor="#f9f9f9" dir="ltr"><h1 class="cjk" align="center" style="margin-top: 1.32cm; margin-bottom: 0.5cm">
 <span style="display: inline-block; border: none; padding: 0cm"><span style="background: #ffffff">高雅创作</span></span></h1>
