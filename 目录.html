@@ -1,251 +1,218 @@
 <!DOCTYPE html>
- <html lang="zh">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xperia 机型 - 目录</title>
-  <style>
- /* Wikipedia 风格增强版 */
-body {
-  font-family: 'Georgia', serif;
-  background: linear-gradient(135deg, #eef1f5, #d8dee9);
-  color: #222;
-  margin: 0;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  transition: background 0.5s ease-in-out, color 0.3s ease-in-out;
-}
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xperia 机型 - 目录</title>
+    <style>
+        /* Wikipedia 风格增强版 */
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #eef1f5, #d8dee9);
+            color: #222;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            transition: background 0.5s ease-in-out, color 0.3s ease-in-out;
+        }
 
-/* 暗色模式 */
-body.dark-mode {
-  background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
-  color: #ddd;
-}
+        /* 暗色模式 */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+            color: #ddd;
+        }
 
-/* 玻璃拟态容器 */
-.container {
-  width: 95%;
-  max-width: 800px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  transition: background 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+        /* 玻璃拟态容器 */
+        .container {
+            width: 95%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-/* 暗色模式下的容器 */
-body.dark-mode .container {
-  background: rgba(42, 42, 42, 0.85);
-  backdrop-filter: blur(15px);
-}
+        /* 暗色模式下的容器 */
+        body.dark-mode .container {
+            background: rgba(42, 42, 42, 0.85);
+            backdrop-filter: blur(15px);
+        }
 
-/* 图片样式：原尺寸显示 */
-.header-image {
-  width: auto;
-  max-width: 100%;
-  max-height: 300px;
-  object-fit: contain;
-  margin-bottom: 15px;
-  border-radius: 8px;
-}
+        /* 图片样式 */
+        .header-image {
+            width: auto;
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
 
-/* 标题样式 */
-h1 {
-  font-size: 2em;
-  text-align: center;
-  font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  color: #1c2c39;
-}
+        /* 标题 */
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            color: #1c2c39;
+        }
 
-body.dark-mode h1 {
-  color: #ddd;
-}
+        body.dark-mode h1 {
+            color: #ddd;
+        }
 
-/* 按钮区 */
-.sort-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
+        /* 按钮区 */
+        .sort-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
 
-.sort-buttons button {
-  padding: 10px 18px;
-  font-size: 1em;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #0066cc, #004999);
-  color: white;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 2px 2px 10px rgba(0, 102, 204, 0.3);
-}
+        .sort-buttons button {
+            padding: 10px 18px;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #0066cc, #004999);
+            color: white;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 2px 2px 10px rgba(0, 102, 204, 0.3);
+        }
 
-.sort-buttons button:hover {
-  background: linear-gradient(135deg, #004999, #003377);
-  transform: scale(1.05);
-  box-shadow: 2px 2px 15px rgba(0, 102, 204, 0.5);
-}
+        .sort-buttons button:hover {
+            background: linear-gradient(135deg, #004999, #003377);
+            transform: scale(1.05);
+            box-shadow: 2px 2px 15px rgba(0, 102, 204, 0.5);
+        }
 
-/* 机型列表 */
-ul {
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
-}
+        /* 机型列表 */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+        }
 
-.year-item {
-  font-size: 1.3em;
-  font-weight: bold;
-  background: linear-gradient(135deg, #e9ecef, #d0d7dd);
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
-}
+        .year-item {
+            font-size: 1.3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #e9ecef, #d0d7dd);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
+        }
 
-body.dark-mode .year-item {
-  background: linear-gradient(135deg, #444, #333);
-}
+        body.dark-mode .year-item {
+            background: linear-gradient(135deg, #444, #333);
+        }
 
-/* 子列表 */
-.model-sublist {
-  margin-left: 20px;
-  padding-left: 10px;
-  padding-top: 5px;
-  font-size: 1.1em;
-}
+        /* 子列表 */
+        .model-sublist {
+            margin-left: 20px;
+            padding-left: 10px;
+            padding-top: 5px;
+            font-size: 1.1em;
+        }
 
-ul li a {
-  text-decoration: none;
-  font-weight: bold;
-  color: #0066cc;
-  transition: all 0.3s ease-in-out;
-}
+        ul li a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #0066cc;
+            transition: all 0.3s ease-in-out;
+        }
 
-ul li a:hover {
-  color: #004999;
-  text-decoration: underline;
-}
+        ul li a:hover {
+            color: #004999;
+            text-decoration: underline;
+        }
 
-/* 暗色模式下的链接 */
-body.dark-mode ul li a {
-  color: #66aaff;
-}
+        body.dark-mode ul li a {
+            color: #66aaff;
+        }
 
-body.dark-mode ul li a:hover {
-  color: #4488dd;
-}
+        body.dark-mode ul li a:hover {
+            color: #4488dd;
+        }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.5em;
-  }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
 
-  .sort-buttons {
-    flex-direction: column;
-    gap: 8px;
-  }
+            .sort-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
 
-  .sort-buttons button {
-    font-size: 0.9em;
-    padding: 8px 14px;
-  }
-}
+            .sort-buttons button {
+                font-size: 0.9em;
+                padding: 8px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./media/hequ.png" alt="Xperia Logo" class="header-image">
+        <h1>Xperia 机型目录</h1>
 
+        <div class="sort-buttons">
+            <button onclick="sortModels(true)">按年份升序</button>
+            <button onclick="sortModels(false)">按年份降序</button>
+        </div>
 
-  </style>
- </head>
- <body>
-  <div class="container">
-  <img src="./media/hequ.png" alt="Xperia Logo" class="header-image">
-  <h1>Xperia 机型目录</h1>
+        <ul id="modelList"></ul>
+    </div>
 
-  <div class="sort-buttons">
-  <button onclick="sortModels(true)">按年份升序</button>
-  <button onclick="sortModels(false)">按年份降序</button>
-  </div>
+    <script>
+        const xperiaModels = [
+            { year: 2007, models: ["Xperia X1"] },
+            { year: 2008, models: ["Xperia X2"] },
+            { year: 2009, models: ["Xperia X10"] },
+            { year: 2010, models: ["Xperia Arc", "Xperia Play"] },
+            { year: 2011, models: ["Xperia Neo", "Xperia Pro"] },
+            { year: 2012, models: ["Xperia S", "Xperia U"] },
+            { year: 2013, models: ["Xperia Z1", "Xperia Z Ultra"] },
+            { year: 2014, models: ["Xperia Z2", "Xperia Z3"] },
+            { year: 2015, models: ["Xperia Z5"] },
+            { year: 2016, models: ["Xperia XZ"] },
+            { year: 2017, models: ["Xperia XZ1", "Xperia XZ Premium"] },
+            { year: 2018, models: ["Xperia XZ2"] },
+            { year: 2019, models: ["Xperia 1"] },
+            { year: 2020, models: ["Xperia 1 II", "Xperia 5 II"] },
+            { year: 2021, models: ["Xperia Pro-I"] },
+            { year: 2022, models: ["Xperia 1 IV"] },
+            { year: 2023, models: ["Xperia 1 V", "Xperia 5 V", "Xperia 10 V"] },
+            { year: 2024, models: ["Xperia 1 VI", "Xperia 10 VI"] },
+            { year: 2025, models: ["Xperia 1 VII", "Xperia 10 VII"] }
+        ];
 
-  <ul id="modelList"></ul>
-  </div>
+        function renderModels(models) {
+            document.getElementById("modelList").innerHTML = models.map(item =>
+                `<li class="year-item">${item.year}</li>
+                 <ul class="model-sublist">
+                    ${item.models.map(model => `<li><a href="#">${model}</a></li>`).join('')}
+                 </ul>`).join('');
+        }
 
-  <script>
-  const xperiaModels = [
-  { year: 2007, models: ["Xperia X1"] },
-  { year: 2008, models: ["Xperia X2"] },
-  { year: 2009, models: ["Xperia X10"] },
-  { year: 2010, models: ["Xperia Arc", "Xperia Play"] },
-  { year: 2011, models: ["Xperia Neo", "Xperia Pro"] },
-  { year: 2012, models: ["Xperia S", "Xperia U"] },
-  { year: 2013, models: ["Xperia Z1", "Xperia Z Ultra"] },
-  { year: 2014, models: ["Xperia Z2", "Xperia Z3"] },
-  { year: 2015, models: ["Xperia Z5"] },
-  { year: 2016, models: ["Xperia XZ"] },
-  { year: 2017, models: ["Xperia XZ1","Xperia XZ Premium"] },
-  { year: 2018, models: ["Xperia XZ2"] },
-  { year: 2019, models: ["Xperia 1"] },
-  { year: 2020, models: ["Xperia 1 II","Xperia 5 II"] },
-  { year: 2021, models: ["Xperia Pro-I"] },
-  { year: 2022, models: ["Xperia 1 IV"] },
-  { year: 2023, models: ["Xperia 1 V","Xperia 5 V","Xperia 10 V"] }
-  { year: 2024, models: ["Xperia 1 VI","Xperia 10 VI"] }
-  { year: 2025, models: ["Xperia 1 VII","Xperia 10 VII"] }
-  ];
+        function sortModels(ascending) {
+            renderModels([...xperiaModels].sort((a, b) => ascending ? a.year - b.year : b.year - a.year));
+        }
 
-  function renderModels(models) {
-  const modelList = document.getElementById("modelList");
-  modelList.innerHTML = "";
-
-  models.forEach(item => {
-  const yearItem = document.createElement("li");
-  yearItem.className = "year-item";
-  yearItem.textContent = item.year;
-
-  const modelSubList = document.createElement("ul");
-  modelSubList.className = "model-sublist";
-
-  item.models.forEach(model => {
-  const modelItem = document.createElement("li");
-  const modelLink = document.createElement("a");
-  modelLink.href = `./models/${model.replace(/\s+/g, '').toLowerCase()}.html`;
-  modelLink.textContent = model;
-  modelItem.appendChild(modelLink);
-  modelSubList.appendChild(modelItem);
-  });
-
-  modelList.appendChild(yearItem);
-  modelList.appendChild(modelSubList);
-  });
-  }
-
-  function sortModels(ascending) {
-  const sortedModels = [...xperiaModels].sort((a, b) =>
-  ascending ? a.year - b.year : b.year - a.year
-  );
-  renderModels(sortedModels);
-  }
-
-  function toggleTheme() {
-  document.body.classList.toggle("dark-mode");
-  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-  }
-
-  if (localStorage.getItem("theme") === "dark" || window.matchMedia("(prefers-color-scheme: dark)").matches) {
-  document.body.classList.add("dark-mode");
-  }
-
-  renderModels(xperiaModels);
-  </script>
- </body>
- </html>
+        renderModels(xperiaModels);
+    </script>
+</body>
+</html>
