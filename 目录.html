@@ -18,13 +18,11 @@
             min-height: 100vh;
             transition: background 0.5s ease-in-out, color 0.3s ease-in-out;
         }
-
         /* 暗色模式 */
         body.dark-mode {
             background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
             color: #ddd;
         }
-
         /* 玻璃拟态容器 */
         .container {
             width: 95%;
@@ -39,13 +37,10 @@
             flex-direction: column;
             align-items: center;
         }
-
-        /* 暗色模式下的容器 */
         body.dark-mode .container {
             background: rgba(42, 42, 42, 0.85);
             backdrop-filter: blur(15px);
         }
-
         /* 图片样式 */
         .header-image {
             width: auto;
@@ -55,8 +50,7 @@
             margin-bottom: 15px;
             border-radius: 8px;
         }
-
-        /* 标题 */
+        /* 标题样式 */
         h1 {
             font-size: 2em;
             text-align: center;
@@ -65,11 +59,9 @@
             margin-bottom: 20px;
             color: #1c2c39;
         }
-
         body.dark-mode h1 {
             color: #ddd;
         }
-
         /* 按钮区 */
         .sort-buttons {
             display: flex;
@@ -77,7 +69,6 @@
             gap: 12px;
             margin-bottom: 20px;
         }
-
         .sort-buttons button {
             padding: 10px 18px;
             font-size: 1em;
@@ -90,20 +81,17 @@
             transition: all 0.3s ease-in-out;
             box-shadow: 2px 2px 10px rgba(0, 102, 204, 0.3);
         }
-
         .sort-buttons button:hover {
             background: linear-gradient(135deg, #004999, #003377);
             transform: scale(1.05);
             box-shadow: 2px 2px 15px rgba(0, 102, 204, 0.5);
         }
-
         /* 机型列表 */
         ul {
             list-style-type: none;
             padding: 0;
             width: 100%;
         }
-
         .year-item {
             font-size: 1.3em;
             font-weight: bold;
@@ -113,50 +101,40 @@
             margin-bottom: 8px;
             box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
         }
-
         body.dark-mode .year-item {
             background: linear-gradient(135deg, #444, #333);
         }
-
-        /* 子列表 */
         .model-sublist {
             margin-left: 20px;
             padding-left: 10px;
             padding-top: 5px;
             font-size: 1.1em;
         }
-
         ul li a {
             text-decoration: none;
             font-weight: bold;
             color: #0066cc;
             transition: all 0.3s ease-in-out;
         }
-
         ul li a:hover {
             color: #004999;
             text-decoration: underline;
         }
-
         body.dark-mode ul li a {
             color: #66aaff;
         }
-
         body.dark-mode ul li a:hover {
             color: #4488dd;
         }
-
         /* 响应式设计 */
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.5em;
             }
-
             .sort-buttons {
                 flex-direction: column;
                 gap: 8px;
             }
-
             .sort-buttons button {
                 font-size: 0.9em;
                 padding: 8px 14px;
@@ -168,18 +146,16 @@
     <div class="container">
         <img src="./media/hequ.png" alt="Xperia Logo" class="header-image">
         <h1>Xperia 机型目录</h1>
-
         <div class="sort-buttons">
             <button onclick="sortModels(true)">按年份升序</button>
             <button onclick="sortModels(false)">按年份降序</button>
         </div>
-
         <ul id="modelList"></ul>
     </div>
 
     <script>
         const xperiaModels = [
-            { year: 2007, models: ["Xperia X1"] },
+           { year: 2007, models: ["Xperia X1"] },
             { year: 2008, models: ["Xperia X2"] },
             { year: 2009, models: ["Xperia X10"] },
             { year: 2010, models: ["Xperia Arc", "Xperia Play"] },
@@ -197,19 +173,55 @@
             { year: 2022, models: ["Xperia 1 IV"] },
             { year: 2023, models: ["Xperia 1 V", "Xperia 5 V", "Xperia 10 V"] },
             { year: 2024, models: ["Xperia 1 VI", "Xperia 10 VI"] },
-            { year: 2025, models: ["Xperia 1 VII", "Xperia 10 VII"] }
+            { year: 2025, models: ["Xperia 1 VII", "Xperia 10 VII"] },
         ];
 
         function renderModels(models) {
-            document.getElementById("modelList").innerHTML = models.map(item =>
-                `<li class="year-item">${item.year}</li>
-                 <ul class="model-sublist">
-                    ${item.models.map(model => `<li><a href="#">${model}</a></li>`).join('')}
-                 </ul>`).join('');
+            const modelList = document.getElementById("modelList");
+            modelList.innerHTML = "";
+
+            models.forEach(item => {
+                const yearItem = document.createElement("li");
+                yearItem.className = "year-item";
+                yearItem.textContent = item.year;
+
+                const modelSubList = document.createElement("ul");
+                modelSubList.className = "model-sublist";
+
+                item.models.forEach(model => {
+                    const modelItem = document.createElement("li");
+                    const modelLink = document.createElement("a");
+
+                    const modelFileName = `./models/${model.replace(/\s+/g, '').toLowerCase()}.html`;
+                    modelLink.href = "#";
+                    modelLink.textContent = model;
+
+                    modelLink.onclick = async function(event) {
+                        event.preventDefault();
+                        try {
+                            const response = await fetch(modelFileName, { method: 'HEAD' });
+                            if (response.ok) {
+                                window.location.href = modelFileName;
+                            } else {
+                                alert("本页面蛆都不剩");
+                            }
+                        } catch {
+                            alert("本页面蛆都不剩");
+                        }
+                    };
+
+                    modelItem.appendChild(modelLink);
+                    modelSubList.appendChild(modelItem);
+                });
+
+                modelList.appendChild(yearItem);
+                modelList.appendChild(modelSubList);
+            });
         }
 
         function sortModels(ascending) {
-            renderModels([...xperiaModels].sort((a, b) => ascending ? a.year - b.year : b.year - a.year));
+            const sortedModels = [...xperiaModels].sort((a, b) => ascending ? a.year - b.year : b.year - a.year);
+            renderModels(sortedModels);
         }
 
         renderModels(xperiaModels);
