@@ -1,0 +1,244 @@
+<html><body><html><body><html><body><!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xperia 机型页面</title>
+    <style>
+        /* 颜色 & 变量 */
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --border-color: #ccc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* 暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #181818;
+                --text-color: #eee;
+                --border-color: #444;
+                --card-bg: rgba(40, 40, 40, 0.9);
+                --shadow-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* 全局样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            font-size: 1.4em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--border-color);
+            color: white;
+        }
+
+        /* 颜色模块 */
+        .color-box {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+
+        /* 图片框样式 */
+        .image-box {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="section">
+        <h2>Xperia XZ Premium</h2>
+        <p><strong>Xperia XZ Premium</strong></p>
+        <p>Xperia XZ Premium的国行版本于2017年6月8日上市。其特色是搭载了4k分辨率的LCD屏幕，并支持HDR显示。这是索尼第二款使用4k屏幕的手机.</p>
+        <div class="image-box">
+            <img src="../picture/XperiaXZPremium.jpg" alt="Xperia xzp图片">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>硬件参数</h2>
+        <table>
+            <tr>
+                <th>参数</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>SoC</td>
+                <td>Qualcomm Snapdragon 835</td>
+            </tr>
+ <tr>
+                <td>网络制式</td>
+                <td>2G,3G,4G</td>
+            </tr>
+            <tr>
+                <td>RAM</td>
+                <td>4GB</td>
+            </tr>
+            <tr>
+                <td>ROM</td>
+                <td>64GB (可通过SD卡拓展至256GB)</td>
+            </tr>
+            <tr>
+                <td>屏幕分辨率</td>
+                <td>3840x2160(4K HDR LCD)</td>
+            </tr>
+            <tr>
+                <td>屏幕材质</td>
+                <td>TFT</td>
+            </tr>
+             <tr>
+                <td>屏幕尺寸</td>
+                <td>5.5英寸</td>
+            </tr>
+            <tr>
+                <td>机身尺寸</td>
+                <td>156x77x7.9mm</td>
+            </tr>
+            <tr>
+                <td>重量</td>
+                <td>195g</td>
+            </tr>
+             <tr>
+                <td>耳机口类别</td>
+                <td>3.5mm耳机接口</td>
+            </tr>
+            <tr>
+                <td>防水等级</td>
+                <td>IP68</td>
+            </tr>
+            <tr>
+                <td>相机</td>
+
+                <td>19MP主摄像头+前置13MP</td>
+            </tr>
+            <tr>
+                <td>电池大小</td>
+                <td>3230mAh</td>
+            </tr>
+            <tr>
+                <td>充电功率</td>
+                <td>18W (Type C)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>软件系统</h2>
+        <table>
+            <tr>
+                <th>系统版本</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>出厂 Android 版本</td>
+                <td>Android 7.1</td>
+            </tr>
+            <tr>
+                <td>可升级至</td>
+                <td>Android 9</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>颜色</h2>
+        <table>
+            <tr>
+                <th>颜色</th>
+                <th>名称</th>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #c3c3c3;"></span></td>
+                <td>镜面银色</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #000;"></span></td>
+                <td>黑色</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color:#ed1c24"></span></td>
+                <td>红色</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color:#ffc0b1"></span></td>
+                <td>粉色</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>轶事 </h2>
+        <p>  *XZ Premium作为相当受欢迎的一款<del>洋垃圾</del>为机友们津津乐道。这不是没有原因的。\\
+首先，骁龙835的加持，让XZ Premium成功地成为了<del>一代钉子户</del>神机。相比老大哥[[历代机型:2015:xperia_z5_premium|Xperia Z5 Premium]]，XZ Premium在日常使用中的体验几乎完美。骁龙835相比骁龙810的功耗控制、能效比方面强了不止一星半点，也使得4k在手机上真正有了使用价值。((起码很多人使用XZ Premium是使用全局4k的。你有看到有人把Z5 Premium打开全局4k使用吗？还是自己的猪蹄要紧（))XZ Premium相比前代唯一的遗憾就是在屏幕上牺牲了，最高亮度明显低了一档((并没有具体数据，结论为笔者将两台机器并排比较得出，可能存在个别差))，并且换用了PWM调光((为了更佳的HDR效果))。除此之外，XZ Premium相比前代Z5 Premium就是硬件全方面换代升级，换用了新的设计((更大更重了))。可以说，是台均衡水桶机了((最突出的其实是价格，起售价格¥5899，当年真索粉才冲得起（作为参考，同期的华为旗舰Mate 9起售价格为3999（虽然不是4k))。\\
+其次，XZ Premium在XDA论坛上的资源也相当丰富。有许多优秀的第三方ROM适配((可惜的是UNOFFICIAL的ROM居多))，让这款手机到目前为止依然能拥有良好的日常使用体验。((前提是你要解锁刷机了，索尼的官方系统向来没有那么好用))((正在编辑着这段文字的XZ Premium十分愉悦)) \\
+  * **存在的小问题** \\
+  *XZ Premium的屏幕存在断触问题，音游玩家请绕道（
+  *边框很容易掉漆磨损((逼死强迫症！使用XZ Premium的用户千万别裸奔，你会后悔的))</p>
+  
+   </div>
+
+</div>
+
+</body>
+</html>
+</body></html></body></html></body></html>
