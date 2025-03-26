@@ -1,0 +1,244 @@
+<html><body><!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xperia 机型页面</title>
+    <style>
+        /* 颜色 & 变量 */
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --border-color: #ccc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* 暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #181818;
+                --text-color: #eee;
+                --border-color: #444;
+                --card-bg: rgba(40, 40, 40, 0.9);
+                --shadow-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* 全局样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            font-size: 1.4em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--border-color);
+            color: white;
+        }
+
+        /* 颜色模块 */
+        .color-box {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+
+        /* 图片框样式 */
+        .image-box {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="section">
+        <h2>Xperia 1</h2>
+        <p><strong>Xperia 1</strong></p>
+        <p>Xperia 1是索尼公司于2019年2月25日在西班牙巴塞罗那的MWC2019大会上发布了一款智能手机，原被称作“XZ4”，该机是手机业内首次采用了21:9比例的带鱼屏设计，并且也首次搭载了4K OLED显示屏和三摄像头（长焦，广角，超广角）。并且从Xperia 1发售迄今为止Xperia 高端或者中端机型的名称采取了数字命名（1、5、10）。</p>
+        <div class="image-box">
+            <img src="../picture/xperia1.jpg" alt="Xperia 1图片">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>硬件参数</h2>
+        <table>
+            <tr>
+                <th>参数</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>SoC</td>
+                <td>Qualcomm Snapdragon 855</td>
+            </tr>
+            <tr>
+                <td>网络制式</td>
+                <td>2G,3G,4G</td>
+            </tr>
+            <tr>
+                <td>RAM</td>
+                <td>6GB</td>
+            </tr>
+            <tr>
+                <td>ROM</td>
+                <td>64GB/128GB (可通过SD卡拓展至512GB)</td>
+            </tr>
+            <tr>
+                <td>屏幕分辨率</td>
+                <td>3840×1644 (4K HDR OLED)</td>
+            </tr>
+            <tr>
+                <td>屏幕材质</td>
+                <td>POLED</td>
+            </tr>
+               <tr>
+                <td>屏幕尺寸</td>
+                <td>6.5英寸</td>
+            </tr>
+            <tr>
+                <td>机身尺寸</td>
+                <td>167x72x8.2mm</td>
+            </tr>
+            <tr>
+                <td>重量</td>
+                <td>178g</td>
+            </tr>
+            <tr>
+ <tr>
+                <td>耳机口类别</td>
+                <td>Type C</td>
+            </tr>
+            <tr>
+                <td>防水等级</td>
+                <td>IP68</td>
+            </tr>
+            <tr>
+                <td>相机</td>
+                <td>12MP(广角)+12MP(长焦)+12MP（超广角）+0.8MP(前置)</td>
+            </tr>
+            <tr>
+                <td>电池大小</td>
+                <td>3300mAh</td>
+            </tr>
+            <tr>
+                <td>充电功率</td>
+                <td>18W (Type C)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>软件系统</h2>
+        <table>
+            <tr>
+                <th>系统版本</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>出厂 Android 版本</td>
+                <td>Android 9</td>
+            </tr>
+            <tr>
+                <td>可升级至</td>
+                <td>Android 11</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>颜色</h2>
+        <table>
+            <tr>
+                <th>颜色</th>
+                <th>名称</th>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #FFFFFF;"></span></td>
+                <td>雪白</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #000;"></span></td>
+                <td>夜黑</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #684B8D;"></span></td>
+                <td>霞紫</td>
+            </tr>
+<tr>
+                <td><span class="color-box" style="background-color: #808082;"></span></td>
+                <td>雾灰</td>
+
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>轶事 </h2>
+        <p>该款机型原本是继续XZ系列产品线的，只是更改了设计风格和产品发展方向，所以重新命名为1（寓意新的开始)</p>
+        <p>该机原本没有26mm广角镜头，再投入量产前不久才加入的。</p>
+<p>该机虽然官方支持IP65/68，但是防水性能照比之前的Z系列和XZ系列要弱的（所以笔者<color #ed1c24>**不建议**</color>其一言不合就下水，贴吧部分人因下水而进水翻车）</p>
+<p>该机日版流通到国内的多数为softbank版</p>
+<p>该机推出过**Professional Editon**版本（内部型号为J9150），仅有日本独家销售，并且售价大约是9000+人民币，实际仅仅是加入了“Imaging Edge Mobile”和“transfer&tagging add-on”应用，可以配合索尼相机来使用。可以通过USB Type-C进行有线局域网连接，并且屏幕色温默认调谐为D65。可以通过刷固件在一般的Xperia 1 dual版上实现完全功能！！！<color #ed1c24>并无硬件上升级</color>。</p>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
+</body></html>
