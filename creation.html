@@ -20,10 +20,16 @@
             padding-bottom: 0.3em;
             display: inline-block;
         }
+        .image-container {
+            width: 600px; /* 设置图片容器的宽度 */
+            height: 300px; /* 设置图片容器的高度 */
+            overflow: hidden; /* 隐藏超出容器的图片部分 */
+            margin: 0 auto 20px; /* 设置外边距，使图片居中 */
+        }
         .image-container img {
             width: 100%;
             height: auto;
-            margin-bottom: 20px;
+            display: block; /* 确保图片不会有额外的底部间距 */
         }
         nav ul {
             list-style: none;
