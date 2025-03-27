@@ -1,0 +1,241 @@
+<html><body><html><body><!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xperia 机型页面</title>
+    <style>
+        /* 颜色 & 变量 */
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --border-color: #ccc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* 暗黑模式 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #181818;
+                --text-color: #eee;
+                --border-color: #444;
+                --card-bg: rgba(40, 40, 40, 0.9);
+                --shadow-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* 全局样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            font-size: 1.4em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--border-color);
+            color: white;
+        }
+
+        /* 颜色模块 */
+        .color-box {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
+
+        /* 图片框样式 */
+        .image-box {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="section">
+        <h2>Xperia 1 III</h2>
+        <p><strong>Xperia 1 III</strong></p>
+        <p>索尼Xperia 1 III是索尼公司于2021年4月14日发布的一款智能手机。该机型是继索尼Xperia 1 II的继任机型，并且长焦为双焦段的真光学变焦（70mm-105mm），并且把前一代的摄影大师app作为了默认的相机app。同时在4K屏幕的原有的基础上增加了120HZ高刷新率的支持。</p>
+        <div class="image-box">
+            <img src="../picture/xperia1iii.jpg" alt="Xperia 1iii图片">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>硬件参数</h2>
+        <table>
+            <tr>
+                <th>参数</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>SoC</td>
+                <td>Qualcomm Snapdragon 888</td>
+            </tr>
+ <tr>
+                <td>网络制式</td>
+                <td>2G,3G,4G,5G</td>
+            </tr>
+            <tr>
+                <td>RAM</td>
+                <td>12GB</td>
+            </tr>
+            <tr>
+                <td>ROM</td>
+                <td>256GB/512GB (可通过SD卡拓展至1TB)</td>
+            </tr>
+            <tr>
+                <td>屏幕分辨率</td>
+                <td>3840X1644(4K HDR OLED)</td>
+            </tr>
+            <tr>
+                <td>屏幕材质</td>
+                <td>OLED</td>
+            </tr>
+             <tr>
+                <td>屏幕尺寸</td>
+                <td>6.5英寸</td>
+            </tr>
+            <tr>
+                <td>机身尺寸</td>
+                <td>165x71x8.2mm</td>
+            </tr>
+            <tr>
+                <td>重量</td>
+                <td>187g</td>
+            </tr>
+             <tr>
+                <td>耳机口类别</td>
+                <td>3.5mm耳机接口</td>
+            </tr>
+            <tr>
+                <td>防水等级</td>
+                <td>IP68</td>
+            </tr>
+            <tr>
+                <td>相机</td>
+
+                <td>12MP主摄像头+12MP广角+12MP长焦+前置0.8MP</td>
+            </tr>
+            <tr>
+                <td>电池大小</td>
+                <td>4500mAh</td>
+            </tr>
+            <tr>
+                <td>充电功率</td>
+                <td>30W (Type C)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>软件系统</h2>
+        <table>
+            <tr>
+                <th>系统版本</th>
+                <th>详情</th>
+            </tr>
+            <tr>
+                <td>出厂 Android 版本</td>
+                <td>Android 11</td>
+            </tr>
+            <tr>
+                <td>可升级至</td>
+                <td>Android 13</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>颜色</h2>
+        <table>
+            <tr>
+                <th>颜色</th>
+                <th>名称</th>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #9B9C98;"></span></td>
+                <td>灰色</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color: #393838;"></span></td>
+                <td>磨砂黑</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color:#353745"></span></td>
+                <td>紫色</td>
+            </tr>
+            <tr>
+                <td><span class="color-box" style="background-color:#394849"></span></td>
+                <td>绿色</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>轶事 </h2>
+        <p>该机型因为骁龙888发热较高且功耗大续航总体和前一代Xperia 1 II差别不大</p>
+<p>该机型的OLED屏幕暗色模式下有些发绿不均匀，但是总体上效果还是不错的</p>
+<p>该机型有一些第三方原生OS的资瓷，比如LineageOS，可玩性还是不错的</p>
+  <p>该机型国行版本后续加入了flyme的索尼定制的部分apps</p>
+   </div>
+
+</div>
+
+</body>
+</html>
+</body></html></body></html>
