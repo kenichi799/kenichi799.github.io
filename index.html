@@ -6,224 +6,292 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">    
   <meta http-equiv="X-UA-Compatible" content="IE=edge">    
   <title>XperiaWiki</title>    
-  <style>    
-    /* 引入自定义主标题字体 */    
-    @font-face {    
-      font-family: 'CustomTitle';    
-      src: url('./media/1.ttf') format('truetype');    
-    }    
-    
-    /* 颜色 & 变量 */    
-    :root {    
-      --bg-color: #f8f9fa;    
-      --text-color: #202122;    
-      --link-color: #0645ad;    
-      --hover-color: #0b0080;    
-      --border-color: #a2a9b1;    
-      --nav-bg: #f3f3f3;    
-    }    
-        
-    /* 暗黑模式 */    
-    @media (prefers-color-scheme: dark) {    
-      :root {    
-        --bg-color: #121212;    
-        --text-color: #e0e0e0;    
-        --link-color: #5fa3ff;    
-        --hover-color: #99c2ff;    
-        --border-color: #444;    
-        --nav-bg: #282828;    
-      }    
-    }    
-        
-    /* 全局样式 */    
-    body {    
-      font-family: Arial, sans-serif;    
-      margin: 0;    
-      padding: 0;    
-      background: var(--bg-color);    
-      color: var(--text-color);    
-      line-height: 1.6;    
-    }    
-        
-    /* 侧边导航 - PC版 */    
-    .sidebar {    
-      width: 160px;    
-      background: var(--nav-bg);    
-      border-right: 1px solid var(--border-color);    
-      padding: 15px;    
-      height: 100vh;    
-      position: fixed;    
-      left: 0;    
-      top: 0;    
-    }    
-        
-    .sidebar h3 {    
-      margin-top: 0;    
-      font-size: 1.2em;    
-    }    
-        
-    .sidebar ul {    
-      list-style: none;    
-      padding: 0;    
-      margin: 0;    
-    }    
-        
-    .sidebar ul li {    
-      margin: 8px 0;    
-    }    
-        
-    .sidebar ul li a {    
-      text-decoration: none;    
-      color: var(--link-color);    
-      font-size: 0.95em;    
-    }    
-        
-    .sidebar ul li a:hover {    
-      color: var(--hover-color);    
-    }    
-        
-    /* 顶部导航 - 手机版 */    
-    .topnav {    
-      display: none;    
-      width: 100%;    
-      background: var(--nav-bg);    
-      border-bottom: 1px solid var(--border-color);    
-      padding: 10px;    
-      text-align: center;    
-    }    
-        
-    .topnav ul {    
-      list-style: none;    
-      margin: 0;    
-      padding: 0;    
-      display: flex;    
-      justify-content: center;    
-      flex-wrap: wrap;    
-    }    
-        
-    .topnav ul li {    
-      margin: 0 10px;    
-    }    
-        
-    .topnav ul li a {    
-      text-decoration: none;    
-      color: var(--link-color);    
-      font-size: 0.95em;    
-    }    
-        
-    .topnav ul li a:hover {    
-      color: var(--hover-color);    
-    }    
-        
-    /* 主要内容 */    
-    .content {    
-      margin: 20px;    
-      margin-left: 180px; /* 留出侧边导航空间 */    
-      max-width: 900px;    
-      padding: 20px;    
-    }    
-        
-    /* 主标题区 */    
-    .header {    
-      display: flex;    
-      align-items: center;    
-      justify-content: center;    
-      margin-bottom: 20px;    
-    }    
-        
-    .main-title {    
-      font-family: 'CustomTitle', Arial, sans-serif;    
-      font-size: 2em;    
-      margin: 0 10px;    
-    }    
-        
-    .header img {    
-      height: 60px;    
-      width: auto;    
-      margin-right: 10px;    
-    }    
-        
-    /* 章节样式（非卡片风格） */    
-    .section {    
-      margin-bottom: 20px;    
-      padding-bottom: 10px;    
-      border-bottom: 1px solid var(--border-color);    
-    }    
-        
-    .section h2 {    
-      font-size: 1.4em;    
-      margin-bottom: 5px;    
-    }    
-        
-    .section p {    
-      margin: 5px 0;    
-    }    
-        
-    .button {    
-      display: inline-block;    
-      padding: 6px 12px;    
-      background-color: var(--link-color);    
-      color: #fff;    
-      text-decoration: none;    
-      border: 1px solid var(--link-color);    
-      border-radius: 3px;    
-      margin-top: 5px;    
-    }    
-        
-    .button:hover {    
-      background-color: var(--hover-color);    
-      border-color: var(--hover-color);    
-    }    
-        
-    /* 图片预览区域 */    
-    .preview {    
-      margin-top: 10px;    
-      text-align: center;    
-    }    
-        
-    .image-frame {    
-      width: 200px;    
-      height: 200px;    
-      overflow: hidden;    
-      border: 1px solid var(--border-color);    
-      margin: 0 auto 10px;    
-    }    
-        
-    .image-frame img {    
-      width: 100%;    
-      height: 100%;    
-      object-fit: cover;    
-    }    
-        
-    /* 响应式布局 */    
-    @media (max-width: 768px) {    
-      .sidebar {    
-        display: none;    
-      }    
-          
-      .topnav {    
-        display: block;    
-      }    
-          
-      .content {    
-        margin: 0;    
-        padding: 15px;    
-      }    
-          
-      .header {    
-        flex-direction: column;    
-      }    
-          
-      .header img {    
-        margin: 0 0 10px 0;    
-      }    
-    }    
-        
-    @media (max-width: 480px) {    
-      .main-title {    
-        font-size: 1.5em;    
-      }    
-    }    
+<style>
+    /* 引入自定义主标题字体 */
+    @font-face {
+      font-family: 'CustomTitle';
+      src: url('./media/1.ttf') format('truetype');
+    }
+
+    /* Material Design 3 取色机制 - 根据系统主题 */
+    /* Light Theme */
+    :root {
+      --md-sys-color-primary: #6750A4;
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-primary-container: #EADDFF;
+      --md-sys-color-on-primary-container: #21005E;
+      --md-sys-color-secondary: #625B71;
+      --md-sys-color-on-secondary: #FFFFFF;
+      --md-sys-color-secondary-container: #E8DEF8;
+      --md-sys-color-on-secondary-container: #1D192B;
+      --md-sys-color-tertiary: #7D5260;
+      --md-sys-color-on-tertiary: #FFFFFF;
+      --md-sys-color-tertiary-container: #FFD8E4;
+      --md-sys-color-on-tertiary-container: #31111D;
+      --md-sys-color-error: #B3261E;
+      --md-sys-color-on-error: #FFFFFF;
+      --md-sys-color-error-container: #F9DEDC;
+      --md-sys-color-on-error-container: #410E0B;
+      --md-sys-color-outline: #79747E;
+      --md-sys-color-background: #FFFBFE;
+      --md-sys-color-on-background: #1C1B1F;
+      --md-sys-color-surface: #FFFBFE;
+      --md-sys-color-on-surface: #1C1B1F;
+      --md-sys-color-surface-variant: #E7E0EC;
+      --md-sys-color-on-surface-variant: #49454F;
+      --md-sys-color-inverse-surface: #313033;
+      --md-sys-color-inverse-on-surface: #F4EFF4;
+      --md-sys-color-inverse-primary: #D0BCFF;
+      --md-sys-color-shadow: #000000;
+      --md-sys-color-surface-tint: var(--md-sys-color-primary);
+      --md-sys-color-scrim: #000000;
+
+      /* 自定义变量映射到 Material Design 3 颜色 */
+      --bg-color: var(--md-sys-color-background);
+      --text-color: var(--md-sys-color-on-background);
+      --link-color: var(--md-sys-color-primary);
+      --hover-color: var(--md-sys-color-inverse-primary);
+      --border-color: var(--md-sys-color-outline);
+      --nav-bg: var(--md-sys-color-surface-variant);
+    }
+
+    /* Dark Theme */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --md-sys-color-primary: #D0BCFF;
+        --md-sys-color-on-primary: #321969;
+        --md-sys-color-primary-container: #4F378B;
+        --md-sys-color-on-primary-container: #EADDFF;
+        --md-sys-color-secondary: #CCC2DC;
+        --md-sys-color-on-secondary: #332D41;
+        --md-sys-color-secondary-container: #4A4458;
+        --md-sys-color-on-secondary-container: #E8DEF8;
+        --md-sys-color-tertiary: #EFB8C8;
+        --md-sys-color-on-tertiary: #492532;
+        --md-sys-color-tertiary-container: #633B48;
+        --md-sys-color-on-tertiary-container: #FFD8E4;
+        --md-sys-color-error: #F2B8B5;
+        --md-sys-color-on-error: #601410;
+        --md-sys-color-error-container: #8C1D18;
+        --md-sys-color-on-error-container: #F9DEDC;
+        --md-sys-color-outline: #938F99;
+        --md-sys-color-background: #141218;
+        --md-sys-color-on-background: #E6E0E9;
+        --md-sys-color-surface: #141218;
+        --md-sys-color-on-surface: #E6E0E9;
+        --md-sys-color-surface-variant: #49454F;
+        --md-sys-color-on-surface-variant: #CAC4D0;
+        --md-sys-color-inverse-surface: #E6E0E9;
+        --md-sys-color-inverse-on-surface: #313033;
+        --md-sys-color-inverse-primary: #6750A4;
+        --md-sys-color-shadow: #000000;
+        --md-sys-color-surface-tint: var(--md-sys-color-primary);
+        --md-sys-color-scrim: #000000;
+
+        /* 自定义变量映射到 Material Design 3 颜色 */
+        --bg-color: var(--md-sys-color-background);
+        --text-color: var(--md-sys-color-on-background);
+        --link-color: var(--md-sys-color-primary);
+        --hover-color: var(--md-sys-color-inverse-primary);
+        --border-color: var(--md-sys-color-outline);
+        --nav-bg: var(--md-sys-color-surface-variant);
+      }
+    }
+
+    /* 全局样式 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    /* 侧边导航 - PC版 */
+    .sidebar {
+      width: 160px;
+      background: var(--nav-bg);
+      border-right: 1px solid var(--border-color);
+      padding: 15px;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+      font-size: 1.2em;
+      color: var(--md-sys-color-on-surface-variant); /* 使用 MD3 颜色 */
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar ul li {
+      margin: 8px 0;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: var(--link-color);
+      font-size: 0.95em;
+    }
+
+    .sidebar ul li a:hover {
+      color: var(--hover-color);
+    }
+
+    /* 顶部导航 - 手机版 */
+    .topnav {
+      display: none;
+      width: 100%;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px;
+      text-align: center;
+    }
+
+    .topnav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .topnav ul li {
+      margin: 0 10px;
+    }
+
+    .topnav ul li a {
+      text-decoration: none;
+      color: var(--link-color);
+      font-size: 0.95em;
+    }
+
+    .topnav ul li a:hover {
+      color: var(--hover-color);
+    }
+
+    /* 主要内容 */
+    .content {
+      margin: 20px;
+      margin-left: 180px; /* 留出侧边导航空间 */
+      max-width: 900px;
+      padding: 20px;
+    }
+
+    /* 主标题区 */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .main-title {
+      font-family: 'CustomTitle', Arial, sans-serif;
+      font-size: 2em;
+      margin: 0 10px;
+      color: var(--md-sys-color-primary); /* 使用 MD3 颜色 */
+    }
+
+    .header img {
+      height: 60px;
+      width: auto;
+      margin-right: 10px;
+    }
+
+    /* 章节样式（非卡片风格） */
+    .section {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section h2 {
+      font-size: 1.4em;
+      margin-bottom: 5px;
+      color: var(--md-sys-color-secondary); /* 使用 MD3 颜色 */
+    }
+
+    .section p {
+      margin: 5px 0;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 6px 12px;
+      background-color: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      text-decoration: none;
+      border: 1px solid var(--md-sys-color-primary);
+      border-radius: 3px;
+      margin-top: 5px;
+    }
+
+    .button:hover {
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      border-color: var(--md-sys-color-primary-container);
+    }
+
+    /* 图片预览区域 */
+    .preview {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .image-frame {
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      margin: 0 auto 10px;
+      background-color: var(--md-sys-color-surface); /* 使用 MD3 颜色 */
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 响应式布局 */
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .topnav {
+        display: block;
+      }
+
+      .content {
+        margin: 0;
+        padding: 15px;
+      }
+
+      .header {
+        flex-direction: column;
+      }
+
+      .header img {
+        margin: 0 0 10px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-title {
+        font-size: 1.5em;
+      }
+    }
   </style>    
 </head>    
 <body>    
