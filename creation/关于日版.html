@@ -4,76 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日版手机详解</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f8f9fa;
-            color: #222;
-        }
+ <style>
+    /* Material Design 3 字体 */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #121212;
-                color: #e0e0e0;
-            }
+    /* Material Design 3 取色 - Light Theme - Docomo Red, KDDI Orange, SoftBank Yellow */
+    :root {
+      --md-sys-color-primary: #E30B13; /* Docomo Red */
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-primary-container: #FFDAD9;
+      --md-sys-color-on-primary-container: #3F0001;
+      --md-sys-color-secondary: #F29900; /* KDDI Orange */
+      --md-sys-color-on-secondary: #FFFFFF;
+      --md-sys-color-secondary-container: #FFD299;
+      --md-sys-color-on-secondary-container: #3E2700;
+      --md-sys-color-tertiary: #FFD700; /* SoftBank Yellow (toned down for better contrast) */
+      --md-sys-color-on-tertiary: #000000;
+      --md-sys-color-tertiary-container: #FFF176;
+      --md-sys-color-on-tertiary-container: #272100;
+      --md-sys-color-error: #BA1A1A;
+      --md-sys-color-on-error: #FFFFFF;
+      --md-sys-color-error-container: #FFDAD6;
+      --md-sys-color-on-error-container: #410002;
+      --md-sys-color-outline: #79747E;
+      --md-sys-color-background: #FFFBFE;
+      --md-sys-color-on-background: #1C1B1F;
+      --md-sys-color-surface: #FFFBFE;
+      --md-sys-color-on-surface: #1C1B1F;
+      --md-sys-color-surface-variant: #E7E0EC;
+      --md-sys-color-on-surface-variant: #49454F;
+      --md-sys-color-inverse-surface: #313033;
+      --md-sys-color-inverse-on-surface: #F4EFF4;
+      --md-sys-color-inverse-primary: #FFB3B1;
+      --md-sys-color-shadow: #000000;
+      --md-sys-color-surface-tint: var(--md-sys-color-primary);
+      --md-sys-color-scrim: #000000;
+    }
 
-            pre {
-                background-color: #282828;
-                border-color: #444;
-                color: #e0e0e0;
-            }
+    /* Material Design 3 取色 - Dark Theme - Docomo Red, KDDI Orange, SoftBank Yellow */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --md-sys-color-primary: #FFB3B1; /* Lighter Docomo Red */
+        --md-sys-color-on-primary: #650002;
+        --md-sys-color-primary-container: #900005;
+        --md-sys-color-on-primary-container: #FFDAD9;
+        --md-sys-color-secondary: #FFB948; /* Lighter KDDI Orange */
+        --md-sys-color-on-secondary: #654700;
+        --md-sys-color-secondary-container: #8F6600;
+        --md-sys-color-on-secondary-container: #FFD299;
+        --md-sys-color-tertiary: #FFEC64; /* Darker SoftBank Yellow */
+        --md-sys-color-on-tertiary: #3F3700;
+        --md-sys-color-tertiary-container: #5D5000;
+        --md-sys-color-on-tertiary-container: #FFF176;
+        --md-sys-color-error: #FFB4AB;
+        --md-sys-color-on-error: #690005;
+        --md-sys-color-error-container: #93000A;
+        --md-sys-color-on-error-container: #FFDAD6;
+        --md-sys-color-outline: #938F99;
+        --md-sys-color-background: #1C1B1F;
+        --md-sys-color-on-background: #E6E1E5;
+        --md-sys-color-surface: #1C1B1F;
+        --md-sys-color-on-surface: #E6E1E5;
+        --md-sys-color-surface-variant: #49454F;
+        --md-sys-color-on-surface-variant: #CAC4D0;
+        --md-sys-color-inverse-surface: #E6E1E5;
+        --md-sys-color-inverse-on-surface: #313033;
+        --md-sys-color-inverse-primary: #E30B13;
+        --md-sys-color-shadow: #000000;
+        --md-sys-color-surface-tint: var(--md-sys-color-primary);
+        --md-sys-color-scrim: #000000;
+      }
+    }
 
-            a {
-                color: #89cff0;
-            }
-        }
+    body {
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      margin: 24px;
+      background-color: var(--md-sys-color-background);
+      color: var(--md-sys-color-on-background);
+    }
 
-        h1 {
-            border-bottom: 2px solid #a2a9b1;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-        }
+    h1 {
+      border-bottom: 3px solid var(--md-sys-color-primary);
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+      color: var(--md-sys-color-primary);
+      font-weight: 500;
+      font-size: 2.2rem;
+    }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-        }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 24px;
+      border-radius: 8px; /* Optional: Add rounded corners to images */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    }
 
-        p, pre, ul {
-            margin-bottom: 15px;
-        }
+    p, pre, ul {
+      margin-bottom: 20px;
+      font-size: 1rem;
+      color: var(--md-sys-color-on-background);
+    }
 
-        pre {
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            padding: 10px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-        }
+    pre {
+      background-color: var(--md-sys-color-surface-variant);
+      border: 1px solid var(--md-sys-color-outline);
+      padding: 16px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      border-radius: 8px;
+      color: var(--md-sys-color-on-surface-variant);
+    }
 
-        a {
-            color: #0645ad;
-            text-decoration: none;
-        }
+    a {
+      color: var(--md-sys-color-secondary); /* Use KDDI Orange for links */
+      text-decoration: none;
+      font-weight: 500;
+    }
 
-        a:visited {
-            color: #0645ad;
-        }
+    a:visited {
+      color: var(--md-sys-color-secondary);
+    }
 
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
+    a:hover {
+      text-decoration: underline;
+      color: var(--md-sys-color-primary); /* Use Docomo Red for hover */
+    }
 
-        @media (max-width: 600px) {
-            body {
-                margin: 10px;
-            }
-        }
-    </style>
+    ul {
+      list-style-type: disc;
+      padding-left: 24px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      body {
+        margin: 16px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 16px;
+      }
+
+      p, pre, ul {
+        margin-bottom: 16px;
+        font-size: 0.9rem;
+      }
+
+      pre {
+        padding: 12px;
+        border-radius: 6px;
+      }
+    }
+  </style>
 </head>
 <body>
     <img src="../picture/jp.jpg" alt="日版手机" />
