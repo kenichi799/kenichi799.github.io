@@ -4,53 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>高雅创作</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            color: #333;
-            background-color: #f8f9fa;
-            line-height: 1.6;
-            margin: 20px;
-            text-align: center;
-        }
-        h1 {
-            color: #202122;
-            font-size: 1.8em;
-            border-bottom: 1px solid #a2a9b1;
-            padding-bottom: 0.3em;
-            display: inline-block;
-        }
-        .image-container {
-            width: 600px; /* 设置图片容器的宽度 */
-            height: 300px; /* 设置图片容器的高度 */
-            overflow: hidden; /* 隐藏超出容器的图片部分 */
-            margin: 0 auto 20px; /* 设置外边距，使图片居中 */
-        }
-        .image-container img {
-            width: 100%;
-            height: auto;
-            display: block; /* 确保图片不会有额外的底部间距 */
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        nav li {
-            margin: 10px 0;
-        }
-        nav a {
-            color: #0645ad;
-            text-decoration: none;
-            font-size: 1.2em;
-            display: inline-block;
-            padding: 5px 10px;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #0b0080;
-            text-decoration: underline;
-        }
-    </style>
+<style>
+    /* Material Design 3 字体 */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+    /* Material Design 3 取色 - Light Theme */
+    :root {
+      --md-sys-color-primary: #6750A4;
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-primary-container: #EADDFF;
+      --md-sys-color-on-primary-container: #21005E;
+      --md-sys-color-secondary: #625B71;
+      --md-sys-color-on-secondary: #FFFFFF;
+      --md-sys-color-secondary-container: #E8DEF8;
+      --md-sys-color-on-secondary-container: #1D192B;
+      --md-sys-color-tertiary: #7D5260;
+      --md-sys-color-on-tertiary: #FFFFFF;
+      --md-sys-color-tertiary-container: #FFD8E4;
+      --md-sys-color-on-tertiary-container: #31111D;
+      --md-sys-color-error: #B3261E;
+      --md-sys-color-on-error: #FFFFFF;
+      --md-sys-color-error-container: #F9DEDC;
+      --md-sys-color-on-error-container: #410E0B;
+      --md-sys-color-outline: #79747E;
+      --md-sys-color-background: #FFFBFE;
+      --md-sys-color-on-background: #1C1B1F;
+      --md-sys-color-surface: #FFFBFE;
+      --md-sys-color-on-surface: #1C1B1F;
+      --md-sys-color-surface-variant: #E7E0EC;
+      --md-sys-color-on-surface-variant: #49454F;
+      --md-sys-color-inverse-surface: #313033;
+      --md-sys-color-inverse-on-surface: #F4EFF4;
+      --md-sys-color-inverse-primary: #D0BCFF;
+      --md-sys-color-shadow: #000000;
+      --md-sys-color-surface-tint: var(--md-sys-color-primary);
+      --md-sys-color-scrim: #000000;
+    }
+
+    /* Material Design 3 取色 - Dark Theme */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --md-sys-color-primary: #D0BCFF;
+        --md-sys-color-on-primary: #321969;
+        --md-sys-color-primary-container: #4F378B;
+        --md-sys-color-on-primary-container: #EADDFF;
+        --md-sys-color-secondary: #CCC2DC;
+        --md-sys-color-on-secondary: #332D41;
+        --md-sys-color-secondary-container: #4A4458;
+        --md-sys-color-on-secondary-container: #E8DEF8;
+        --md-sys-color-tertiary: #EFB8C8;
+        --md-sys-color-on-tertiary: #492532;
+        --md-sys-color-tertiary-container: #633B48;
+        --md-sys-color-on-tertiary-container: #FFD8E4;
+        --md-sys-color-error: #F2B8B5;
+        --md-sys-color-on-error: #601410;
+        --md-sys-color-error-container: #8C1D18;
+        --md-sys-color-on-error-container: #F9DEDC;
+        --md-sys-color-outline: #938F99;
+        --md-sys-color-background: #141218;
+        --md-sys-color-on-background: #E6E0E9;
+        --md-sys-color-surface: #141218;
+        --md-sys-color-on-surface: #E6E0E9;
+        --md-sys-color-surface-variant: #49454F;
+        --md-sys-color-on-surface-variant: #CAC4D0;
+        --md-sys-color-inverse-surface: #E6E0E9;
+        --md-sys-color-inverse-on-surface: #313033;
+        --md-sys-color-inverse-primary: #6750A4;
+        --md-sys-color-shadow: #000000;
+        --md-sys-color-surface-tint: var(--md-sys-color-primary);
+        --md-sys-color-scrim: #000000;
+      }
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif; /* 使用 Material Design 3 字体 */
+      color: var(--md-sys-color-on-background);
+      background-color: var(--md-sys-color-background);
+      line-height: 1.6;
+      margin: 24px; /* 调整外边距 */
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: var(--md-sys-color-primary); /* 使用强调色 */
+      font-size: 2.25rem; /* 调整字体大小 */
+      font-weight: 500; /* 使用中等字重 */
+      border-bottom: 3px solid var(--md-sys-color-primary); /* 更明显的下划线 */
+      padding-bottom: 0.5em;
+      margin-bottom: 1.5em;
+      display: inline-block;
+    }
+
+    .image-container {
+      width: 80%; /* 使容器宽度更灵活 */
+      max-width: 600px; /* 设置最大宽度 */
+      height: auto; /* 保持宽高比 */
+      aspect-ratio: 16 / 9; /* 常见的视频比例 */
+      overflow: hidden;
+      margin-bottom: 24px;
+      border-radius: 8px; /* 添加圆角 */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加轻微阴影 */
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    nav {
+      padding: 16px;
+      border-radius: 8px;
+      background-color: var(--md-sys-color-surface-variant); /* 使用表面变体颜色作为导航背景 */
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* 添加轻微阴影 */
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 16px; /* 导航项之间的间距 */
+      justify-content: center;
+    }
+
+    nav li {
+      margin: 0;
+    }
+
+    nav a {
+      color: var(--md-sys-color-primary);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 24px; /* 圆角按钮形状 */
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      text-decoration: none; /* 移除悬停下划线 */
+    }
+  </style>
 </head>
 <body>
     <div class="image-container">
