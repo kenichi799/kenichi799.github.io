@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>沉浸式浏览器评估</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+    <style>
+        /* Material 3 基础颜色与排版变量 */
+        :root {
+            /* Light Theme Palette - 更生动的颜色 */
+            --md-sys-color-primary: #7C4DFF; /* 深紫 */
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #E7DCFF;
+            --md-sys-color-on-primary-container: #22005D;
+
+            --md-sys-color-secondary: #FF80AB; /* 亮粉 */
+            --md-sys-color-on-secondary: #FFFFFF;
+
+            --md-sys-color-tertiary: #4FC3F7; /* 亮蓝 */
+            --md-sys-color-on-tertiary: #FFFFFF;
+
+            --md-sys-color-error: #EF5350; /* 红色 */
+            --md-sys-color-on-error: #FFFFFF;
+
+            --md-sys-color-background: #F8F8F8; /* 浅灰背景 */
+            --md-sys-color-on-background: #212121;
+
+            --md-sys-color-surface: #FFFFFF; /* 卡片背景 */
+            --md-sys-color-on-surface: #212121;
+
+            --md-sys-color-surface-variant: #E0E0E0;
+            --md-sys-color-on-surface-variant: #616161;
+
+            --md-sys-color-outline: #BDBDBD;
+
+            --md-sys-color-shadow: #000000;
+
+            --md-sys-color-surface-container: #FFFFFF;
+            --md-sys-color-surface-container-low: #F5F5F5;
+            --md-sys-color-surface-container-high: #E0E0E0;
+        }
+
+        /* Dark Theme Palette (More Contrast) */
+        body.dark-theme {
+            --md-sys-color-primary: #BE97FF;
+            --md-sys-color-on-primary: #4D00B0;
+            --md-sys-color-primary-container: #330080;
+            --md-sys-color-on-primary-container: #E7DCFF;
+
+            --md-sys-color-secondary: #FFB3D4;
+            --md-sys-color-on-secondary: #6B0033;
+
+            --md-sys-color-tertiary: #84DFFF;
+            --md-sys-color-on-tertiary: #00364A;
+
+            --md-sys-color-error: #FFB4AB;
+            --md-sys-color-on-error: #690005;
+
+            --md-sys-color-background: #121212;
+            --md-sys-color-on-background: #E0E0E0;
+
+            --md-sys-color-surface: #1E1E1E;
+            --md-sys-color-on-surface: #E0E0E0;
+
+            --md-sys-color-surface-variant: #424242;
+            --md-sys-color-on-surface-variant: #BDBDBD;
+
+            --md-sys-color-outline: #616161;
+
+            --md-sys-color-shadow: #000000;
+
+            --md-sys-color-surface-container: #2C2C2C;
+            --md-sys-color-surface-container-low: #212121;
+            --md-sys-color-surface-container-high: #333333;
+        }
+
+        /* Typography - Fallback to system fonts if Roboto not loaded */
+        :root {
+            --md-sys-typescale-display-large-font: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            --md-sys-typescale-display-large-size: 57px;
+            --md-sys-typescale-display-large-weight: 700; /* 更粗的标题 */
+
+            --md-sys-typescale-headline-medium-font: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            --md-sys-typescale-headline-medium-size: 28px;
+            --md-sys-typescale-headline-medium-weight: 500;
+
+            --md-sys-typescale-body-large-font: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            --md-sys-typescale-body-large-size: 16px;
+            --md-sys-typescale-body-large-weight: 400;
+
+            --md-sys-typescale-label-large-font: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            --md-sys-typescale-label-large-size: 14px;
+            --md-sys-typescale-label-large-weight: 500;
+        }
+
+
+        body {
+            font-family: var(--md-sys-typescale-body-large-font);
+            background: linear-gradient(135deg, var(--md-sys-color-background) 0%, var(--md-sys-color-surface-container-low) 100%); /* 渐变背景 */
+            color: var(--md-sys-color-on-background);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            transition: background 0.5s ease, color 0.5s ease;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+        }
+
+        .app-bar {
+            width: 100%;
+            background-color: var(--md-sys-color-primary); /* Use primary color for app bar */
+            color: var(--md-sys-color-on-primary);
+            padding: 20px 24px; /* Increased padding */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px; /* More space below app bar */
+            box-sizing: border-box;
+        }
+
+        .app-bar h1 {
+            font-family: var(--md-sys-typescale-display-large-font);
+            font-size: 32px; /* Larger title */
+            font-weight: var(--md-sys-typescale-headline-medium-weight);
+            color: var(--md-sys-color-on-primary);
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .app-bar button {
+            background: none;
+            border: none;
+            color: var(--md-sys-color-on-primary);
+            font-size: 28px; /* Larger icon */
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%; /* Circular button */
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            display: flex; /* Center icon */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .app-bar button:hover {
+            background-color: rgba(255, 255, 255, 0.15); /* Lighter hover effect */
+        }
+        .app-bar button:active {
+            transform: scale(0.95); /* Slight press effect */
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px; /* Larger gap between cards */
+            max-width: 1200px;
+            width: calc(100% - 48px); /* Account for side padding */
+            padding-bottom: 40px;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: var(--md-sys-color-surface);
+            border-radius: 20px; /* Large border-radius */
+            padding: 36px; /* Increased padding */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+            flex: 1 1 calc(50% - 32px); /* Responsive two-column layout */
+            min-width: 340px;
+            box-sizing: border-box;
+            transition: background-color 0.4s ease, box-shadow 0.3s ease;
+            position: relative; /* For pseudo-element */
+            overflow: hidden; /* Hide overflow for the top gradient */
+        }
+        /* Decorative gradient at the top of the container */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px; /* Height of the gradient bar */
+            background: linear-gradient(90deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        h2 {
+            font-family: var(--md-sys-typescale-headline-medium-font);
+            font-size: var(--md-sys-typescale-headline-medium-size);
+            font-weight: var(--md-sys-typescale-headline-medium-weight);
+            color: var(--md-sys-color-on-surface);
+            margin-top: 0;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--md-sys-color-surface-variant); /* Underline for title */
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        h2 .material-symbols-outlined {
+            margin-right: 16px;
+            font-size: 36px; /* Larger icon in heading */
+            color: var(--md-sys-color-primary);
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-secondary) 100%); /* Gradient button */
+            color: var(--md-sys-color-on-primary);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 32px; /* Pill-shaped button */
+            font-family: var(--md-sys-typescale-label-large-font);
+            font-size: 16px; /* Larger button text */
+            font-weight: var(--md-sys-typescale-label-large-weight);
+            cursor: pointer;
+            transition: all 0.3s ease; /* Smooth transitions */
+            margin-top: 40px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, var(--md-sys-color-secondary) 0%, var(--md-sys-color-primary) 100%); /* Reverse gradient on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 14px 0; /* Increased line height */
+            border-bottom: 1px solid var(--md-sys-color-outline);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--md-sys-typescale-body-large-size);
+            animation: fadeIn 0.5s ease-out forwards; /* Fade-in animation */
+            opacity: 0; /* Initially hidden */
+        }
+        li:nth-child(1) { animation-delay: 0.1s; }
+        li:nth-child(2) { animation-delay: 0.2s; }
+        li:nth-child(3) { animation-delay: 0.3s; }
+        li:nth-child(4) { animation-delay: 0.4s; }
+        li:nth-child(5) { animation-delay: 0.5s; }
+        li:nth-child(6) { animation-delay: 0.6s; }
+        li:nth-child(7) { animation-delay: 0.7s; }
+        li:nth-child(8) { animation-delay: 0.8s; }
+        li:nth-child(9) { animation-delay: 0.9s; }
+        li:nth-child(10) { animation-delay: 1.0s; }
+        li:nth-child(11) { animation-delay: 1.1s; }
+        li:nth-child(12) { animation-delay: 1.2s; }
+        li:nth-child(13) { animation-delay: 1.3s; }
+        li:nth-child(14) { animation-delay: 1.4s; }
+        li:nth-child(15) { animation-delay: 1.5s; }
+        li:nth-child(16) { animation-delay: 1.6s; }
+        li:nth-child(17) { animation-delay: 1.7s; }
+        li:nth-child(18) { animation-delay: 1.8s; }
+        li:nth-child(19) { animation-delay: 1.9s; }
+        li:nth-child(20) { animation-delay: 2.0s; }
+        li:nth-child(21) { animation-delay: 2.1s; }
+        li:nth-child(22) { animation-delay: 2.2s; }
+        li:nth-child(23) { animation-delay: 2.3s; }
+        li:nth-child(24) { animation-delay: 2.4s; }
+        li:nth-child(25) { animation-delay: 2.5s; }
+        li:nth-child(26) { animation-delay: 2.6s; }
+        li:nth-child(27) { animation-delay: 2.7s; }
+        li:nth-child(28) { animation-delay: 2.8s; }
+        li:nth-child(29) { animation-delay: 2.9s; }
+        li:nth-child(30) { animation-delay: 3.0s; }
+        li:nth-child(31) { animation-delay: 3.1s; } /* New OS entry */
+        li:nth-child(32) { animation-delay: 3.2s; } /* New Engine entry */
+
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        .status-supported {
+            color: #4CAF50; /* Material Green */
+            font-weight: 500;
+        }
+
+        .status-not-supported {
+            color: var(--md-sys-color-error);
+            font-weight: 500;
+        }
+
+        .status-unknown {
+            color: var(--md-sys-color-outline);
+            font-weight: 400;
+        }
+
+        .test-result {
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface);
+            display: flex;
+            align-items: center;
+            white-space: nowrap; /* Prevent wrapping */
+            text-align: right;
+        }
+
+        .score {
+            font-weight: 700;
+            color: var(--md-sys-color-primary);
+            margin-left: 12px;
+            font-size: 20px; /* Larger individual scores */
+            min-width: 60px; /* Ensure scores align */
+            text-align: right;
+        }
+
+        #overall-score {
+            text-align: center;
+            font-family: var(--md-sys-typescale-headline-medium-font);
+            font-size: var(--md-sys-typescale-headline-medium-size);
+            color: var(--md-sys-color-on-surface);
+            margin-top: 40px;
+            padding-top: 28px;
+            border-top: 2px solid var(--md-sys-color-surface-variant); /* Stronger separator */
+            position: relative;
+        }
+        #overall-score::before {
+            content: "emoji_events"; /* Material Symbol for a trophy */
+            font-family: 'Material Symbols Outlined'; /* Specify font for icon */
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%) translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--md-sys-color-tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: var(--md-sys-color-on-tertiary);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+
+        #total-score {
+            font-size: var(--md-sys-typescale-display-large-size); /* Largest font size for total score */
+            font-weight: 700;
+            color: var(--md-sys-color-primary);
+            display: block;
+            margin-top: 12px;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 800px) {
+            .app-bar {
+                padding: 16px 20px;
+                margin-bottom: 32px;
+            }
+            .app-bar h1 {
+                font-size: 28px;
+            }
+            main {
+                flex-direction: column;
+                align-items: center;
+                padding: 0 20px 20px;
+                width: calc(100% - 40px);
+            }
+            .container {
+                flex: 1 1 100%;
+                max-width: 100%;
+                padding: 28px;
+            }
+            h2 {
+                font-size: 26px;
+                margin-bottom: 20px;
+            }
+            h2 .material-symbols-outlined {
+                font-size: 32px;
+                margin-right: 12px;
+            }
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 12px 0;
+            }
+            .test-result {
+                margin-top: 6px;
+                width: 100%;
+                justify-content: flex-end; /* Align results to the right on small screens */
+            }
+            .score {
+                font-size: 18px;
+            }
+            #total-score {
+                font-size: 48px;
+            }
+            button {
+                padding: 12px 28px;
+            }
+        }
+
+        /* Extra Small Screens */
+        @media (max-width: 480px) {
+            .app-bar h1 {
+                font-size: 24px;
+            }
+            .container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            h2 .material-symbols-outlined {
+                font-size: 28px;
+            }
+            li {
+                font-size: 15px;
+            }
+            .score {
+                font-size: 16px;
+            }
+            #total-score {
+                font-size: 40px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="app-bar">
+        <h1>浏览器性能报告</h1>
+        <button id="theme-toggle" class="material-symbols-outlined" aria-label="Toggle dark mode">
+            light_mode
+        </button>
+    </div>
+
+    <main>
+        <div class="container">
+            <h2><span class="material-symbols-outlined">api</span>浏览器功能检测</h2>
+            
+            <ul id="feature-list">
+                <li><span>地理定位 (Geolocation)</span><span id="feature-geolocation" class="status-unknown">检测中...</span></li>
+                <li><span>WebGL</span><span id="feature-webgl" class="status-unknown">检测中...</span></li>
+                <li><span>Web Workers</span><span id="feature-webworkers" class="status-unknown">检测中...</span></li>
+                <li><span>Service Workers</span><span id="feature-serviceworkers" class="status-unknown">检测中...</span></li>
+                <li><span>WebAssembly</span><span id="feature-webassembly" class="status-unknown">检测中...</span></li>
+      
+                <li><span>通知 (Notifications)</span><span id="feature-notifications" class="status-unknown">检测中...</span></li>
+                <li><span>电池状态 API (Battery Status)</span><span id="feature-battery" class="status-unknown">检测中...</span></li>
+                <li><span>全屏 API (Fullscreen)</span><span id="feature-fullscreen" class="status-unknown">检测中...</span></li>
+                <li><span>剪贴板 API (Clipboard)</span><span id="feature-clipboard" class="status-unknown">检测中...</span></li>
+                <li><span>网络信息 API (Network Information)</span><span id="feature-network" class="status-unknown">检测中...</span></li>
+     
+                <li><span>媒体设备 API (Media Devices)</span><span id="feature-mediadevices" class="status-unknown">检测中...</span></li>
+                <li><span>Web Audio API</span><span id="feature-webaudio" class="status-unknown">检测中...</span></li>
+                <li><span>Intersection Observer</span><span id="feature-intersectionobserver" class="status-unknown">检测中...</span></li>
+                <li><span>Resize Observer</span><span id="feature-resizeobserver" class="status-unknown">检测中...</span></li>
+                <li><span>Payment Request API</span><span id="feature-paymentrequest" class="status-unknown">检测中...</span></li>
+      
+                <li><span>Web Speech API (语音识别)</span><span id="feature-webspeech" class="status-unknown">检测中...</span></li>
+                <li><span>WebRTC (实时通信)</span><span id="feature-webrtc" class="status-unknown">检测中...</span></li>
+                <li><span>IndexedDB (离线存储)</span><span id="feature-indexeddb" class="status-unknown">检测中...</span></li>
+                <li><span>Beacon API (信标)</span><span id="feature-beacon" class="status-unknown">检测中...</span></li>
+                <li><span>Broadcast Channel API</span><span id="feature-broadcastchannel" class="status-unknown">检测中...</span></li>
+       
+                <li><span>Device Orientation API (设备方向)</span><span id="feature-deviceorientation" class="status-unknown">检测中...</span></li>
+                <li><span>Canvas 2D</span><span id="feature-canvas2d" class="status-unknown">检测中...</span></li>
+                <li><span>Offscreen Canvas</span><span id="feature-offscreencanvas" class="status-unknown">检测中...</span></li>
+                <li><span>Web Share API</span><span id="feature-webshare" class="status-unknown">检测中...</span></li>
+                <li><span>Credential Management API</span><span id="feature-credentialmanager" class="status-unknown">检测中...</span></li>
+        
+                <li><span>Picture-in-Picture API</span><span id="feature-pip" class="status-unknown">检测中...</span></li>
+                <li><span>Popover API</span><span id="feature-popover" class="status-unknown">检测中...</span></li>
+                <li><span>Storage Manager API</span><span id="feature-storagemanager" class="status-unknown">检测中...</span></li>
+                <li><span>Web Bluetooth API</span><span id="feature-webbluetooth" class="status-unknown">检测中...</span></li>
+                <li><span>Web USB API</span><span id="feature-webusb" class="status-unknown">检测中...</span></li>
+                <li><span>设备系统版本 (OS Version)</span><span id="feature-os-version" class="status-unknown">检测中...</span></li>
+                <li><span>浏览器内核版本 (Engine Version)</span><span id="feature-engine-version" class="status-unknown">检测中...</span></li>
+            </ul>
+            <button onclick="detectFeatures()">重新检测功能</button>
+        </div>
+
+        <div class="container">
+            <h2><span class="material-symbols-outlined">speed</span>浏览器性能跑分</h2>
+            <ul id="performance-list">
+                <li><span>算术运算 (浮点数)</span><span id="perf-math" class="test-result">未测试</span></li>
+                <li><span>大循环迭代</span><span id="perf-loop" class="test-result">未测试</span></li>
+     
+                <li><span>数组操作 (排序/过滤)</span><span id="perf-array" class="test-result">未测试</span></li>
+                <li><span>字符串处理 (拼接/查找)</span><span id="perf-string" class="test-result">未测试</span></li>
+                <li><span>DOM 操作 (动态创建)</span><span id="perf-dom" class="test-result">未测试</span></li>
+                <li><span>Web Storage 读写</span><span id="perf-storage" class="test-result">未测试</span></li>
+                <li><span>Promise 解析</span><span id="perf-promise" class="test-result">未测试</span></li>
+        
+                <li><span>正则表达式匹配</span><span id="perf-regex" class="test-result">未测试</span></li>
+                <li><span>JSON 解析/序列化</span><span id="perf-json" class="test-result">未测试</span></li>
+                <li><span>ImageData 处理</span><span id="perf-imagedata" class="test-result">未测试</span></li>
+            </ul>
+            <div id="overall-score">
+                总分：<span class="score" id="total-score">0</span>
+         
+            </div>
+            <button onclick="runPerformanceTests()">开始性能测试</button>
+        </div>
+    </main>
+
+    <script>
+        // --- 主题切换 ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            if (body.classList.contains('dark-theme')) {
+                themeToggle.textContent = 'dark_mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.textContent = 'light_mode';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-theme');
+            themeToggle.textContent = 'dark_mode';
+        } else {
+            themeToggle.textContent = 'light_mode';
+        }
+
+        // --- 功能检测 ---
+        function checkFeature(api) {
+            if (typeof api !== 'undefined') {
+                return '<span class="status-supported">支持</span>';
+            } else {
+                return '<span class="status-not-supported">不支持</span>';
+            }
+        }
+
+        function detectFeatures() {
+            document.getElementById('feature-geolocation').innerHTML = checkFeature(navigator.geolocation);
+            document.getElementById('feature-webgl').innerHTML = checkFeature(document.createElement('canvas').getContext('webgl') || document.createElement('canvas').getContext('experimental-webgl'));
+            document.getElementById('feature-webworkers').innerHTML = checkFeature(window.Worker);
+            document.getElementById('feature-serviceworkers').innerHTML = checkFeature(navigator.serviceWorker);
+            document.getElementById('feature-webassembly').innerHTML = checkFeature(window.WebAssembly);
+            document.getElementById('feature-notifications').innerHTML = checkFeature(window.Notification);
+            document.getElementById('feature-battery').innerHTML = checkFeature(navigator.getBattery);
+            document.getElementById('feature-fullscreen').innerHTML = checkFeature(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen || document.documentElement.mozRequestFullScreen || document.documentElement.msRequestFullscreen);
+            document.getElementById('feature-clipboard').innerHTML = checkFeature(navigator.clipboard);
+            document.getElementById('feature-network').innerHTML = checkFeature(navigator.connection);
+            document.getElementById('feature-mediadevices').innerHTML = checkFeature(navigator.mediaDevices);
+            document.getElementById('feature-webaudio').innerHTML = checkFeature(window.AudioContext || window.webkitAudioContext);
+            document.getElementById('feature-intersectionobserver').innerHTML = checkFeature(window.IntersectionObserver);
+            document.getElementById('feature-resizeobserver').innerHTML = checkFeature(window.ResizeObserver);
+            document.getElementById('feature-paymentrequest').innerHTML = checkFeature(window.PaymentRequest);
+            document.getElementById('feature-webspeech').innerHTML = checkFeature(window.SpeechRecognition || window.webkitSpeechRecognition);
+            document.getElementById('feature-webrtc').innerHTML = checkFeature(window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection);
+            document.getElementById('feature-indexeddb').innerHTML = checkFeature(window.indexedDB);
+            document.getElementById('feature-beacon').innerHTML = checkFeature(navigator.sendBeacon);
+            document.getElementById('feature-broadcastchannel').innerHTML = checkFeature(window.BroadcastChannel);
+            document.getElementById('feature-deviceorientation').innerHTML = checkFeature(window.DeviceOrientationEvent);
+            document.getElementById('feature-canvas2d').innerHTML = checkFeature(document.createElement('canvas').getContext('2d'));
+            document.getElementById('feature-offscreencanvas').innerHTML = checkFeature(window.OffscreenCanvas);
+            document.getElementById('feature-webshare').innerHTML = checkFeature(navigator.share);
+            document.getElementById('feature-credentialmanager').innerHTML = checkFeature(navigator.credentials);
+            document.getElementById('feature-pip').innerHTML = checkFeature(document.pictureInPictureEnabled);
+            document.getElementById('feature-popover').innerHTML = checkFeature(HTMLElement.prototype.hasOwnProperty('popover'));
+            document.getElementById('feature-storagemanager').innerHTML = checkFeature(navigator.storage);
+            document.getElementById('feature-webbluetooth').innerHTML = checkFeature(navigator.bluetooth);
+            document.getElementById('feature-webusb').innerHTML = checkFeature(navigator.usb);
+
+            // 针对特定API进行更细致的检测
+            if (typeof navigator.getBattery === 'function') {
+                navigator.getBattery().then(battery => {
+                    document.getElementById('feature-battery').innerHTML = `<span class="status-supported">支持 (电量: ${Math.floor(battery.level * 100)}%)</span>`;
+                }).catch(() => {
+                    document.getElementById('feature-battery').innerHTML = '<span class="status-supported">支持 (无法获取电量)</span>';
+                });
+            }
+
+            if (typeof Notification === 'function' && Notification.permission !== 'denied') {
+                document.getElementById('feature-notifications').innerHTML = `<span class="status-supported">支持 (${Notification.permission})</span>`;
+            }
+            if (typeof navigator.share === 'function') {
+                // Can only check if API exists, not if it can actually share specific data without user interaction
+                document.getElementById('feature-webshare').innerHTML = `<span class="status-supported">支持</span>`;
+            }
+
+            // --- 设备系统版本检测 ---
+            let osVersion = "未知";
+            const userAgent = navigator.userAgent;
+
+            if (/Windows NT (\d+\.\d+)/.test(userAgent)) {
+                osVersion = "Windows " + RegExp.$1;
+            } else if (/Mac OS X (\d+[\._]\d+[\._]?\d*)/.test(userAgent)) {
+                osVersion = "macOS " + RegExp.$1.replace(/_/g, '.');
+            } else if (/Android (\d+\.\d+(?:\.\d+)?)/.test(userAgent)) {
+                osVersion = "Android " + RegExp.$1;
+            } else if (/(iPhone|iPad|iPod).*OS (\d+_\d+(?:_\d+)?)/.test(userAgent)) {
+                osVersion = "iOS " + RegExp.$2.replace(/_/g, '.');
+            } else if (/Linux/.test(userAgent)) {
+                osVersion = "Linux"; // Specific version often not in UA
+            }
+            document.getElementById('feature-os-version').innerHTML = `<span class="status-supported">${osVersion}</span>`;
+
+            // --- 浏览器内核版本检测 ---
+            let engineVersion = "未知";
+            if (/Chrome\/(\d+\.\d+\.\d+\.\d+)/.test(userAgent)) {
+                engineVersion = "Blink (Chrome) " + RegExp.$1;
+            } else if (/Edg\/(\d+\.\d+\.\d+\.\d+)/.test(userAgent)) {
+                engineVersion = "Blink (Edge) " + RegExp.$1;
+            } else if (/Firefox\/(\d+\.\d+)/.test(userAgent)) {
+                engineVersion = "Gecko (Firefox) " + RegExp.$1;
+            } else if (/Version\/(\d+\.\d+\.?\d*)\sSafari/.test(userAgent) && /AppleWebKit\/(\d+\.\d+\.?\d*)/.test(userAgent)) {
+                engineVersion = `WebKit (Safari) ${RegExp.$1} / AppleWebKit ${RegExp.$2}`;
+            } else if (/Trident\/(\d+\.\d+)/.test(userAgent)) { // Old IE
+                engineVersion = "Trident (IE) " + RegExp.$1;
+            } else if (/Edge\/(\d+\.\d+)/.test(userAgent)) { // Old EdgeHTML
+                engineVersion = "EdgeHTML (Edge) " + RegExp.$1;
+            }
+            document.getElementById('feature-engine-version').innerHTML = `<span class="status-supported">${engineVersion}</span>`;
+        }
+
+        // --- 性能测试与标准化 ---
+        // 基准时间（毫秒），这是一个理想的、非常快速的设备的理论执行时间。
+        // 用于将原始时间转换为标准化分数，越大表示该设备越慢。
+        const BASELINE_MATH_MS = 20;
+        const BASELINE_LOOP_MS = 15;     
+        const BASELINE_ARRAY_MS = 30;    
+        const BASELINE_STRING_MS = 25;   
+        const BASELINE_DOM_MS = 50;      
+        const BASELINE_STORAGE_MS = 80;
+        const BASELINE_PROMISE_MS = 40;  
+        const BASELINE_REGEX_MS = 35;    
+        const BASELINE_JSON_MS = 60;     
+        const BASELINE_IMAGEDATA_MS = 70;
+
+        const MAX_SCORE_PER_TEST = 1000;
+        // 每个测试的最高分
+
+        // 计算标准化分数：分数越高越好。
+        // 思路：用基准时间除以实际时间。如果实际时间小于基准时间，分数将高于 MAX_SCORE_PER_TEST。
+        // 这样可以奖励超高性能的设备。
+        function calculateScore(timeMs, baselineMs) {
+            if (timeMs <= 0.1) return MAX_SCORE_PER_TEST * 2;
+            // 极快，给予高分
+            return Math.floor((baselineMs / timeMs) * MAX_SCORE_PER_TEST);
+        }
+
+        async function runTest(testFunction, resultElementId, baselineMs, runs = 3) {
+            document.getElementById(resultElementId).innerHTML = '运行中...';
+            await new Promise(resolve => setTimeout(resolve, 50)); // Allow UI update
+
+            let totalTime = 0;
+            for (let i = 0; i < runs; i++) {
+                const start = performance.now();
+                testFunction();
+                const end = performance.now();
+                totalTime += (end - start);
+            }
+            const averageTime = totalTime / runs;
+            const score = calculateScore(averageTime, baselineMs);
+
+            document.getElementById(resultElementId).innerHTML = `<span class="test-result">${averageTime.toFixed(2)} ms</span> <span class="score">${score}</span>`;
+            return score;
+        }
+
+        // 性能测试函数（与之前类似，但确保有返回值以防被优化）
+        function runMathTest() {
+            const iterations = 50000000;
+            let result = 1.0;
+            for (let i = 0; i < iterations; i++) {
+                result = Math.sin(result) * Math.cos(result) / Math.sqrt(result + 0.1) + Math.log(result + 1);
+            }
+            return result;
+        }
+
+        function runLoopTest() {
+            const iterations = 200000000;
+            let sum = 0;
+            for (let i = 0; i < iterations; i++) {
+                sum += i;
+            }
+            return sum;
+        }
+
+        function runArrayTest() {
+            const arraySize = 500000;
+            let arr = Array(arraySize).fill(0).map((_, i) => Math.random() * arraySize);
+            arr.sort((a, b) => a - b);
+            arr = arr.filter(n => n > arraySize / 2);
+            return arr.length;
+        }
+
+        function runStringTest() {
+            const iterations = 50000;
+            let longString = "a";
+            for (let i = 0; i < 1000; i++) {
+                longString += Math.random().toString(36).substring(2);
+            }
+            let tempString = "";
+            for (let i = 0; i < iterations; i++) {
+                tempString = longString.replace(/a/g, "b") + "suffix" + i;
+                tempString.indexOf("suffix");
+            }
+            return tempString.length;
+        }
+
+        function runDOMTest() {
+            const iterations = 2000;
+            const container = document.createElement('div');
+            container.style.display = 'none';
+            document.body.appendChild(container);
+
+            for (let i = 0; i < iterations; i++) {
+                const p = document.createElement('p');
+                p.textContent = `Test paragraph ${i}`;
+                container.appendChild(p);
+                if (i % 200 === 0) {
+                    p.style.color = 'red';
+                }
+            }
+            const count = container.children.length;
+            document.body.removeChild(container);
+            return count;
+        }
+
+        function runStorageTest() {
+            const keyPrefix = "test_item_";
+            const itemValue = "x".repeat(1024);
+            const iterations = 1000;
+
+            for (let i = 0; i < iterations; i++) { // 清理旧数据
+                localStorage.removeItem(keyPrefix + i);
+            }
+
+            const writeStart = performance.now();
+            for (let i = 0; i < iterations; i++) {
+                localStorage.setItem(keyPrefix + i, itemValue + i);
+            }
+            const writeEnd = performance.now();
+
+            const readStart = performance.now();
+            for (let i = 0; i < iterations; i++) {
+                localStorage.getItem(keyPrefix + i);
+            }
+            const readEnd = performance.now();
+            for (let i = 0; i < iterations; i++) { // 再次清理
+                localStorage.removeItem(keyPrefix + i);
+            }
+            return (writeEnd - writeStart) + (readEnd - readStart);
+        }
+
+        async function runPromiseTest() {
+            const iterations = 5000;
+            const promises = [];
+            for (let i = 0; i < iterations; i++) {
+                promises.push(Promise.resolve(i).then(val => val * 2));
+            }
+            await Promise.all(promises);
+            return promises.length;
+        }
+
+        function runRegexTest() {
+            const iterations = 10000;
+            const text = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. 1234567890.";
+            const regex = /quick|brown|fox|jumps|lazy|dog|\d+/g;
+            let count = 0;
+            for (let i = 0; i < iterations; i++) {
+                let match;
+                while ((match = regex.exec(text)) !== null) {
+                    count++;
+                }
+                regex.lastIndex = 0;
+            }
+            return count;
+        }
+
+        function runJsonTest() {
+            const largeObject = {};
+            for (let i = 0; i < 1000; i++) {
+                largeObject[`key${i}`] = {
+                    id: i,
+                    name: `Item ${i}`,
+                    value: Math.random(),
+                    data: "abcdefghijklmnopqrstuvwxyz".repeat(10)
+                };
+            }
+            const jsonString = JSON.stringify(largeObject);
+            let parsedObject;
+            for (let i = 0; i < 100; i++) { // 循环解析和序列化
+                parsedObject = JSON.parse(jsonString);
+                JSON.stringify(parsedObject);
+            }
+            return Object.keys(parsedObject).length;
+        }
+
+        function runImageDataTest() {
+            // Create a virtual Canvas for ImageData operations
+            const canvas = document.createElement('canvas');
+            const size = 200; // 200x200 pixels
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Fill with some data
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    ctx.fillStyle = `rgb(${i}, ${j}, 100)`;
+                    ctx.fillRect(i, j, 1, 1);
+                }
+            }
+
+            // Get ImageData and perform pixel operations
+            let imageData = ctx.getImageData(0, 0, size, size);
+            const data = imageData.data;
+            const iterations = 10; // Multiple operations on ImageData
+            for (let k = 0; k < iterations; k++) {
+                for (let i = 0; i < data.length; i += 4) {
+                    data[i] = 255 - data[i]; // Invert Red
+                    data[i+1] = 255 - data[i+1]; // Invert Green
+                    data[i+2] = 255 - data[i+2]; // Invert Blue
+                    // data[i+3] is alpha, keep as is
+                }
+                // Put ImageData back to simulate GPU/CPU interaction
+                ctx.putImageData(imageData, 0, 0);
+            }
+            return data.length;
+        }
+
+
+        async function runPerformanceTests() {
+            document.getElementById('total-score').innerText = '计算中...';
+            const perfElements = document.querySelectorAll('#performance-list .test-result');
+            perfElements.forEach(el => el.innerHTML = '运行中...');
+
+            const scores = [];
+
+            scores.push(await runTest(runMathTest, 'perf-math', BASELINE_MATH_MS));
+            scores.push(await runTest(runLoopTest, 'perf-loop', BASELINE_LOOP_MS));
+            scores.push(await runTest(runArrayTest, 'perf-array', BASELINE_ARRAY_MS));
+            scores.push(await runTest(runStringTest, 'perf-string', BASELINE_STRING_MS));
+            scores.push(await runTest(runDOMTest, 'perf-dom', BASELINE_DOM_MS));
+            scores.push(await runTest(runStorageTest, 'perf-storage', BASELINE_STORAGE_MS));
+            scores.push(await runTest(runPromiseTest, 'perf-promise', BASELINE_PROMISE_MS));
+            scores.push(await runTest(runRegexTest, 'perf-regex', BASELINE_REGEX_MS));
+            scores.push(await runTest(runJsonTest, 'perf-json', BASELINE_JSON_MS));
+            scores.push(await runTest(runImageDataTest, 'perf-imagedata', BASELINE_IMAGEDATA_MS));
+            const totalScore = scores.reduce((sum, current) => sum + current, 0);
+            document.getElementById('total-score').innerHTML = `<span class="score">${totalScore}</span>`;
+        }
+
+        // 页面加载完成后自动检测功能
+        window.onload = () => {
+            detectFeatures();
+        };
+    </script>
+</body>
+</html>
