@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器 UX 跑分工具 🚀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4285F4; /* Google Blue */
+            --primary-dark-color: #357ae8;
+            --background-light: #f5f8fa;
+            --background-dark: #e0f2f7;
+            --text-color: #333;
+            --card-background: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --success-color: #4CAF50;
+            --warning-color: #FFC107;
+            --danger-color: #F44336;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            background-color: var(--background-dark);
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            background-color: var(--card-background);
+            border-radius: 20px; /* More rounded for One UI feel */
+            box-shadow: 0 10px 30px var(--shadow-color);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        h2, h3 {
+            color: var(--text-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.05em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px; /* One UI button style */
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: var(--primary-dark-color);
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-message {
+            background-color: #e3f2fd;
+            color: var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 1.1em;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .progress-bar-container {
+            width: 90%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            height: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            transition: width 0.4s ease-in-out;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .score-display {
+            background-color: var(--background-light);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .score-display p {
+            margin: 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        #overallScore {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .score-note {
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-top: 10px;
+            color: var(--text-color);
+        }
+
+        #testDetails {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        #testDetails li {
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            transition: transform 0.2s ease;
+        }
+
+        #testDetails li:hover {
+            transform: translateY(-3px);
+        }
+
+        #testDetails li strong {
+            color: var(--primary-color);
+            font-weight: 600;
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        #testDetails li span {
+            font-weight: 700;
+            color: var(--text-color);
+            margin-left: 10px;
+        }
+
+        .actual-value {
+            font-size: 0.9em;
+            color: #888;
+            font-weight: 400;
+            margin-left: 10px;
+        }
+
+        .score-good { color: var(--success-color); }
+        .score-average { color: var(--warning-color); }
+        .score-bad { color: var(--danger-color); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>浏览器 UX 跑分 🚀</h1>
+        <p>点击下方按钮开始测试您的浏览器用户体验。这将测量页面加载速度、DOM 操作效率、JavaScript 执行效率、滚动流畅度、输入延迟以及 CSS 动画性能。</p>
+
+        <button id="startButton">开始跑分</button>
+
+        <div id="status" class="status-message hidden">
+            <span id="currentTest">准备中...</span>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div id="results" class="hidden">
+            <h2>跑分结果 ✨</h2>
+            <div class="score-display">
+                <p>总分:</p>
+                <span id="overallScore">N/A</span>
+                <p class="score-note" id="scoreNote"></p>
+            </div>
+
+            <h3>各项得分详情 📊</h3>
+            <ul id="testDetails"></ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const startButton = document.getElementById('startButton');
+            const statusDiv = document.getElementById('status');
+            const currentTestSpan = document.getElementById('currentTest');
+            const progressBar = document.getElementById('progressBar');
+            const resultsDiv = document.getElementById('results');
+            const overallScoreSpan = document.getElementById('overallScore');
+            const scoreNoteP = document.getElementById('scoreNote');
+            const testDetailsUl = document.getElementById('testDetails');
+
+            let totalTests = 0;
+            let completedTests = 0;
+            const testResults = [];
+            
+            // Baseline scores (lower is better for time-based, higher is better for FPS)
+            // These are target ideal values for a score of 100.
+            const BASELINE_SCORES = {
+                pageLoad: 100, // ms - target for near-instant load
+                domManipulation: 5, // ms - target for very fast DOM ops
+                jsExecution: 2, // ms - target for quick JS execution
+                scrollFPS: 60, // FPS - target for perfectly smooth scrolling
+                inputLatency: 20, // ms - target for imperceptible input delay
+                cssAnimation: 16.67 // ms (equivalent to 60 FPS) - target for smooth CSS animations
+            };
+
+            // Weights for each test in the overall score calculation
+            const TEST_WEIGHTS = {
+                pageLoad: 0.20,
+                domManipulation: 0.15,
+                jsExecution: 0.20,
+                scrollFPS: 0.20,
+                inputLatency: 0.15,
+                cssAnimation: 0.10
+            };
+
+            function updateProgress(message) {
+                currentTestSpan.textContent = message;
+                const progress = (completedTests / totalTests) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+
+            function hideElement(el) {
+                el.classList.add('hidden');
+            }
+
+            function showElement(el) {
+                el.classList.remove('hidden');
+            }
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            // Function to calculate individual test scores (0-100)
+            function calculateScore(testKey, actualValue) {
+                const baseline = BASELINE_SCORES[testKey];
+                let score;
+
+                if (['pageLoad', 'domManipulation', 'jsExecution', 'inputLatency', 'cssAnimation'].includes(testKey)) {
+                    // For time-based metrics (lower is better)
+                    // If actualValue is baseline or better, score is 100.
+                    // If actualValue is 10x baseline or worse, score is 0.
+                    // This creates a logarithmic-like curve where improvements near baseline have bigger impact.
+                    const worstValue = baseline * 10; 
+                    if (actualValue <= baseline) {
+                        score = 100;
+                    } else if (actualValue >= worstValue) {
+                        score = 0;
+                    } else {
+                        // Interpolate between 100 (at baseline) and 0 (at worstValue)
+                        score = 100 * (1 - (Math.log(actualValue / baseline) / Math.log(worstValue / baseline)));
+                    }
+                } else if (testKey === 'scrollFPS') {
+                    // For FPS (higher is better)
+                    // If actualValue is baseline or better, score is 100.
+                    // If actualValue is 0, score is 0.
+                    score = (actualValue / baseline) * 100;
+                }
+                return Math.max(0, Math.min(100, Math.round(score)));
+            }
+
+            const tests = [
+                {
+                    name: "页面加载速度 (Page Load Speed)",
+                    key: "pageLoad",
+                    description: "测量加载一个复杂页面所需的时间。",
+                    run: async () => {
+                        const dummyPage = document.createElement('iframe');
+                        dummyPage.style.cssText = 'position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; visibility: hidden;';
+                        document.body.appendChild(dummyPage);
+
+                        const startTime = performance.now();
+                        dummyPage.srcdoc = `<!DOCTYPE html><html><head><title>Dummy Page</title></head><body>
+                            <style>body { margin: 0; padding: 0; display: flex; flex-wrap: wrap; }</style>
+                            ${Array(1000).fill('<div style="width:10px;height:10px;background-color:#eee;border:1px solid #ccc;margin:1px;"></div>').join('')}
+                            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" style="width:100px;height:100px;">
+                            ${Array(500).fill('<p>Some random text to increase DOM size and text rendering.</p>').join('')}
+                        </body></html>`;
+
+                        return new Promise(resolve => {
+                            dummyPage.onload = () => {
+                                const endTime = performance.now();
+                                document.body.removeChild(dummyPage);
+                                resolve(endTime - startTime);
+                            };
+                        });
+                    }
+                },
+                {
+                    name: "DOM 操作效率 (DOM Manipulation)",
+                    key: "domManipulation",
+                    description: "测试浏览器快速添加/删除大量DOM元素的能力。",
+                    run: async () => {
+                        const testDiv = document.createElement('div');
+                        testDiv.style.display = 'none';
+                        document.body.appendChild(testDiv);
+
+                        const startTime = performance.now();
+                        const fragment = document.createDocumentFragment();
+                        for (let i = 0; i < 5000; i++) { // Increased number of elements
+                            const el = document.createElement('span');
+                            el.textContent = `Test ${i}`;
+                            el.className = 'test-item';
+                            fragment.appendChild(el);
+                        }
+                        testDiv.appendChild(fragment);
+                        testDiv.offsetHeight; // Force reflow
+
+                        testDiv.innerHTML = ''; // Clear DOM
+                        const endTime = performance.now();
+                        document.body.removeChild(testDiv);
+                        return endTime - startTime;
+                    }
+                },
+                {
+                    name: "JavaScript 执行效率 (JS Execution)",
+                    key: "jsExecution",
+                    description: "测量浏览器执行复杂JavaScript计算的速度。",
+                    run: async () => {
+                        const startTime = performance.now();
+                        // More complex prime number calculation
+                        function findPrimes(limit) {
+                            const primes = [];
+                            const isPrime = Array(limit + 1).fill(true);
+                            isPrime[0] = isPrime[1] = false;
+                            for (let p = 2; p * p <= limit; p++) {
+                                if (isPrime[p]) {
+                                    for (let i = p * p; i <= limit; i += p)
+                                        isPrime[i] = false;
+                                }
+                            }
+                            for (let p = 2; p <= limit; p++) {
+                                if (isPrime[p]) {
+                                    primes.push(p);
+                                }
+                            }
+                            return primes.length;
+                        }
+                        findPrimes(100000); // Increased limit for more intensive test
+                        const endTime = performance.now();
+                        return endTime - startTime;
+                    }
+                },
+                {
+                    name: "滚动流畅度 (Scroll Smoothness)",
+                    key: "scrollFPS",
+                    description: "模拟滚动并测量平均帧率 (FPS)。",
+                    run: async () => {
+                        const scrollDiv = document.createElement('div');
+                        scrollDiv.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 200px; overflow-y: scroll; display: none;';
+                        for (let i = 0; i < 100; i++) { // Add enough content to make it scrollable
+                            scrollDiv.innerHTML += `<p style="height:50px; border-bottom:1px solid #eee;">Scroll Item ${i}</p>`;
+                        }
+                        document.body.appendChild(scrollDiv);
+
+                        let frames = 0;
+                        let lastTimestamp = performance.now();
+                        const duration = 2000; // milliseconds
+                        const maxScrollTop = scrollDiv.scrollHeight - scrollDiv.clientHeight;
+
+                        scrollDiv.style.display = 'block'; // Make visible for accurate measurement
+                        
+                        // Use requestAnimationFrame to measure actual rendered frames
+                        const animateScroll = (timestamp) => {
+                            if (timestamp - lastTimestamp >= duration) return;
+
+                            const elapsed = timestamp - lastTimestamp;
+                            scrollDiv.scrollTop = (elapsed / duration) * maxScrollTop; // Smooth scroll down
+                            frames++;
+                            requestAnimationFrame(animateScroll);
+                        };
+
+                        return new Promise(resolve => {
+                            const animationId = requestAnimationFrame(animateScroll);
+                            setTimeout(() => {
+                                cancelAnimationFrame(animationId);
+                                document.body.removeChild(scrollDiv);
+                                resolve(frames / (duration / 1000)); // Calculate FPS
+                            }, duration + 100); // Give a bit more time for the last frame
+                        });
+                    }
+                },
+                {
+                    name: "输入延迟 (Input Latency)",
+                    key: "inputLatency",
+                    description: "测量模拟用户输入到浏览器响应之间的时间。",
+                    run: async () => {
+                        const testInput = document.createElement('input');
+                        testInput.type = 'text';
+                        testInput.style.cssText = 'position: absolute; top: -9999px; left: -9999px;';
+                        document.body.appendChild(testInput);
+
+                        const iterations = 50;
+                        let totalLatency = 0;
+
+                        for (let i = 0; i < iterations; i++) {
+                            const startTime = performance.now();
+                            testInput.value = 'a'; // Simulate typing
+                            // Using requestAnimationFrame to ensure the browser has a chance to render
+                            await new Promise(resolve => requestAnimationFrame(() => {
+                                const endTime = performance.now();
+                                totalLatency += (endTime - startTime);
+                                resolve();
+                            }));
+                            testInput.value = ''; // Clear for next iteration
+                            await sleep(50); // Small pause between iterations
+                        }
+
+                        document.body.removeChild(testInput);
+                        return totalLatency / iterations; // Average latency
+                    }
+                },
+                {
+                    name: "CSS 动画性能 (CSS Animation)",
+                    key: "cssAnimation",
+                    description: "测量浏览器渲染复杂CSS动画的帧率。",
+                    run: async () => {
+                        const testDiv = document.createElement('div');
+                        testDiv.style.cssText = `
+                            position: relative; width: 50px; height: 50px; background-color: var(--primary-color);
+                            animation: moveBox 2s linear infinite; display: none; transform: translateX(0);
+                        `;
+                        const styleSheet = document.createElement('style');
+                        styleSheet.innerHTML = `
+                            @keyframes moveBox {
+                                0% { transform: translateX(0px) rotate(0deg); }
+                                50% { transform: translateX(200px) rotate(180deg); }
+                                100% { transform: translateX(0px) rotate(360deg); }
+                            }
+                        `;
+                        document.head.appendChild(styleSheet);
+                        document.body.appendChild(testDiv);
+
+                        let frames = 0;
+                        let lastTimestamp = performance.now();
+                        const duration = 2000; // milliseconds
+                        
+                        testDiv.style.display = 'block'; // Make visible for measurement
+
+                        const animate = (timestamp) => {
+                            if (timestamp - lastTimestamp >= duration) return;
+                            frames++;
+                            requestAnimationFrame(animate);
+                        };
+
+                        return new Promise(resolve => {
+                            const animationId = requestAnimationFrame(animate);
+                            setTimeout(() => {
+                                cancelAnimationFrame(animationId);
+                                document.body.removeChild(testDiv);
+                                document.head.removeChild(styleSheet);
+                                // A perfect 60 FPS for 2 seconds means 120 frames.
+                                // We want to calculate the average frame duration.
+                                resolve(duration / frames); // ms per frame
+                            }, duration + 100);
+                        });
+                    }
+                }
+            ];
+
+            totalTests = tests.length;
+
+            startButton.addEventListener('click', async () => {
+                startButton.disabled = true;
+                hideElement(startButton);
+                showElement(statusDiv);
+                hideElement(resultsDiv);
+                testResults.length = 0;
+                completedTests = 0;
+                testDetailsUl.innerHTML = '';
+                overallScoreSpan.textContent = 'N/A';
+                scoreNoteP.textContent = '';
+                progressBar.style.width = '0%';
+
+                for (const test of tests) {
+                    updateProgress(`正在运行: ${test.name} 🏃‍♂️`);
+                    await sleep(800); // Pause for better UX between tests
+
+                    const actualValue = await test.run();
+                    const score = calculateScore(test.key, actualValue);
+
+                    testResults.push({
+                        name: test.name,
+                        key: test.key,
+                        description: test.description,
+                        actualValue: actualValue.toFixed(2),
+                        score: score
+                    });
+
+                    completedTests++;
+                    updateProgress(`已完成: ${test.name} ✅`);
+                }
+
+                let weightedSum = 0;
+                let totalWeight = 0;
+
+                testResults.forEach(res => {
+                    const weight = TEST_WEIGHTS[res.key] || 0;
+                    weightedSum += res.score * weight;
+                    totalWeight += weight;
+
+                    const listItem = document.createElement('li');
+                    let unit = '';
+                    let scoreClass = '';
+                    if (['pageLoad', 'domManipulation', 'jsExecution', 'inputLatency'].includes(res.key)) {
+                        unit = 'ms';
+                    } else if (res.key === 'scrollFPS') {
+                        unit = 'FPS';
+                    } else if (res.key === 'cssAnimation') {
+                        unit = 'ms/frame';
+                    }
+
+                    if (res.score >= 80) {
+                        scoreClass = 'score-good';
+                    } else if (res.score >= 50) {
+                        scoreClass = 'score-average';
+                    } else {
+                        scoreClass = 'score-bad';
+                    }
+
+                    listItem.innerHTML = `
+                        <strong>${res.name}</strong> 
+                        <span class="${scoreClass}">${res.score} 分</span> 
+                        <span class="actual-value">(实际值: ${res.actualValue} ${unit})</span>
+                    `;
+                    testDetailsUl.appendChild(listItem);
+                });
+
+                const overallScore = totalWeight > 0 ? Math.round(weightedSum / totalWeight) : 0; // Score out of 100
+                overallScoreSpan.textContent = overallScore;
+
+                if (overallScore >= 90) {
+                    scoreNoteP.textContent = '恭喜！您的浏览器用户体验极佳！🌟';
+                } else if (overallScore >= 70) {
+                    scoreNoteP.textContent = '表现良好，您的浏览器提供了不错的用户体验。👍';
+                } else if (overallScore >= 50) {
+                    scoreNoteP.textContent = '一般表现，可能有一些地方可以优化。🤔';
+                } else {
+                    scoreNoteP.textContent = '您的浏览器用户体验可能不尽如人意，建议考虑更新或更换。😟';
+                }
+
+                hideElement(statusDiv);
+                showElement(resultsDiv);
+                startButton.disabled = false;
+                startButton.textContent = '再次跑分';
+                showElement(startButton);
+            });
+        });
+    </script>
+</body>
+</html>
